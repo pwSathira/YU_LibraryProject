@@ -6,8 +6,7 @@ import yorku.eecs.logic.CsvUtil;
 import yorku.eecs.model.item.Item;
 import yorku.eecs.model.user.User;
 
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -91,7 +90,6 @@ public class RentListController {
         checkItemExists(item);
         try {
             List<String> record = CsvUtil.getRecordByColumn(path, itemID, 0);
-            List<String> usersCheckedOut = new ArrayList<>();
             boolean userHasItem = false;
             int indexToBeDeleted = -1;
             for (int i = 0; i < record.size(); i++) {
@@ -113,6 +111,109 @@ public class RentListController {
         } catch(CSVError e) {
             System.out.println("Error returning item: " + itemID + " for user: " + userID);
         }
+    }
+
+    public List<String> getRentList(User user) {
+        /*
+        Returns a String list where each element will be "itemID~DueDate"
+         */
+        String userID = user.getStringId();
+        List<String> rentList = new ArrayList<>();
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(path));
+            String currentLine;
+            while ((currentLine = br.readLine()) != null) {
+                // Separate the data by the comma
+                String[] entries = currentLine.split(",");
+                // Start at 1 because the first element is the item ID
+                for (int i = 1; i < entries.length; i++) {
+                    String[] current = entries[i].split("~");
+                    if (current[0].equals(userID)) {
+                        // entries[0] is the item ID, current[1] is the due date
+                        String addItem = entries[0] + "~" + current[1];
+                        rentList.add(addItem);
+                    }
+                }
+            }
+        } catch(FileNotFoundException e) {
+            System.out.println("Error getting rent list for user: " + userID);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return rentList;
+    }
+
+    public List<String> getUsersDueDates(User user) {
+        /*
+        Returns the due dates for all the items a user has rented, without the item IDs
+         */
+        String userID = user.getStringId();
+        List<String> dueDates = new ArrayList<>();
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(path));
+            String currentLine;
+            while ((currentLine = br.readLine()) != null) {
+                // Separate the data by the comma
+                String[] entries = currentLine.split(",");
+                // Start at 1 because the first element is the item ID
+                for (int i = 1; i < entries.length; i++) {
+                    String[] current = entries[i].split("~");
+                    if (current[0].equals(userID)) {
+                        // entries[0] is the item ID, current[1] is the due date
+                        dueDates.add(current[1]);
+                    }
+                }
+            }
+        } catch(FileNotFoundException e) {
+            System.out.println("Error getting due dates for user: " + userID);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return dueDates;
+    }
+
+    public List<String> getUsersItems(User user) {
+        /*
+        Returns a list containing all the items a user has rented, without the due dates
+         */
+        String userID = user.getStringId();
+        List<String> itemsList = new ArrayList<>();
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(path));
+            String currentLine;
+            while ((currentLine = br.readLine()) != null) {
+                // Separate the data by the comma
+                String[] entries = currentLine.split(",");
+                // Start at 1 because the first element is the item ID
+                for (int i = 1; i < entries.length; i++) {
+                    String[] current = entries[i].split("~");
+                    if (current[0].equals(userID)) {
+                        itemsList.add(entries[0]);
+                    }
+                }
+            }
+        } catch(FileNotFoundException e) {
+            System.out.println("Error getting items for user: " + userID);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return itemsList;
+    }
+
+    public List<String> getUsersRentingItem(Item item) {
+        /*
+        Returns a list containing all the users renting a specified item
+         */
+        String itemID = item.getStringId();
+        List<String> userList = new ArrayList<>();
+        try {
+            List <String> users = CsvUtil.getRecordByColumn(path, itemID, 0);
+            users.remove(0); // Remove the first element since that is the item ID
+            userList = users;
+        } catch(CSVError e) {
+            System.out.println("Error getting the users renting item: " + itemID);
+        }
+        return userList;
     }
 
     /*

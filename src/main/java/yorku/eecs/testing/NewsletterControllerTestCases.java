@@ -10,30 +10,10 @@ import yorku.eecs.model.user.User;
 import yorku.eecs.model.user.UserFactory;
 
 
-public class NewsletterTestCases {
+public class NewsletterControllerTestCases {
 
     User user;
     ArrayList<String> subscribeList = new ArrayList<>();
-
-    /*
-    @Test
-    public void testUserCreation() throws ControllerError {
-        String userName = "Isaiah";
-        String firstName = "Isaiah";
-        String lastName = "Gocool";
-        String password = "testpassword";
-        String id = "200000012";
-        String email = "isaiah@my.yorku.ca";
-        String type = "Student";
-        User user = UserFactory.createUser(type, id, password);
-        UserController userController = new UserController();
-        user = userController.createUser(user);
-        this.user = user;
-        assertEquals("200000012", user.getStringId());
-        assertEquals(200000012, user.getId());
-        assertEquals("testpassword", user.getPassword());
-    }
-    */
 
     @Test
     public void testNewsletterSubscription() throws ControllerError {
@@ -102,6 +82,54 @@ public class NewsletterTestCases {
         this.subscribeList.remove("Bloomberg");
         this.subscribeList.remove("Guardian");
         this.subscribeList.remove("NYTimes");
+        assertEquals(this.user.getSubscribedList(), this.subscribeList);
+    }
+
+    @Test
+    public void testNYTimesSubscription() {
+        NewsletterController newsletterController = new NewsletterController();
+        newsletterController.subscribe(this.user, "NYTimes");
+        this.subscribeList.add("NYTimes");
+        assertEquals(this.user.getSubscribedList(), this.subscribeList);
+    }
+
+    @Test
+    public void testNYTimesUnsubscribe() {
+        NewsletterController newsletterController = new NewsletterController();
+        newsletterController.unsubscribe(this.user, "NYTimes");
+        this.subscribeList.remove("NYTimes");
+        assertEquals(this.user.getSubscribedList(), this.subscribeList);
+    }
+
+    @Test
+    public void testGuardianSubscription() {
+        NewsletterController newsletterController = new NewsletterController();
+        newsletterController.subscribe(this.user, "Guardian");
+        this.subscribeList.add("Guardian");
+        assertEquals(this.user.getSubscribedList(), this.subscribeList);
+    }
+
+    @Test
+    public void testGuardianUnsubscribe() {
+        NewsletterController newsletterController = new NewsletterController();
+        newsletterController.unsubscribe(this.user, "Guardian");
+        this.subscribeList.remove("Guardian");
+        assertEquals(this.user.getSubscribedList(), this.subscribeList);
+    }
+
+    @Test
+    public void testBloombergSubscription() {
+        NewsletterController newsletterController = new NewsletterController();
+        newsletterController.subscribe(this.user, "Bloomberg");
+        this.subscribeList.add("Bloomberg");
+        assertEquals(this.user.getSubscribedList(), this.subscribeList);
+    }
+
+    @Test
+    public void testBloombergUnsubscription() {
+        NewsletterController newsletterController = new NewsletterController();
+        newsletterController.unsubscribe(this.user, "Bloomberg");
+        this.subscribeList.remove("Bloomberg");
         assertEquals(this.user.getSubscribedList(), this.subscribeList);
     }
 

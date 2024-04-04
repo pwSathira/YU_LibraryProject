@@ -2,10 +2,10 @@ package yorku.eecs.testing;
 
 import org.junit.Assert;
 import org.junit.Test;
-import yorku.eecs.model.item.Book;
-import yorku.eecs.model.item.CD_DVD;
-import yorku.eecs.model.item.Magazine;
-import yorku.eecs.model.item.Textbook;
+import org.junit.experimental.theories.suppliers.TestedOn;
+import yorku.eecs.model.item.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.soap.Text;
 
@@ -17,6 +17,107 @@ public class ItemTestCases {
     Magazine mag = new Magazine.Builder().build();
 
     Textbook text = new Textbook.Builder().build();
+
+    Newsletter news = new Newsletter();
+
+
+
+    //Item Abstract Class Test Cases
+    @Test
+    public void testSetItemID() {
+        book.setItemID(123);
+        Assert.assertEquals(book.getItemID(), 123);
+    }
+
+
+    @Test
+    public void testGetItemID() {
+        book.setItemID(123);
+        int ID = book.getItemID();
+        Assert.assertEquals(ID, 123);
+    }
+
+    @Test
+    public void testSetItemName() {
+        book.setItemName("Book Name");
+        Assert.assertEquals(book.getItemName(), "Book Name");
+    }
+
+    @Test
+    public void testGetItemName() {
+        book.setItemName("Book Name");
+        String itemName = book.getItemName();
+        Assert.assertEquals(itemName, "Book Name");
+    }
+    
+    @Test
+    public void testSetItemLocation() {
+        book.setLocation("Upper Floor");
+        Assert.assertEquals(book.getLocation(), "Upper Floor");
+    }
+    
+    @Test
+    public void testGetItemLocation() {
+        book.setLocation("Upper Floor");
+        String location = book.getLocation();
+        Assert.assertEquals(location, "Upper Floor");
+    }
+    
+    @Test
+    public void testSetItemPublisher() {
+        book.setPublisher("Publisher");
+        Assert.assertEquals(book.getPublisher(), "Publisher");
+    }
+
+    @Test
+    public void testGetItemPublisher() {
+        book.setPublisher("Publisher");
+        String publisher = book.getPublisher();
+        Assert.assertEquals(publisher, "Publisher");
+    }
+
+    @Test
+    public void testSetItemPrice() {
+        book.setPrice(5);
+        Assert.assertEquals(book.getPrice(), 5);
+    }
+
+    @Test
+    public void testGetItemPrice() {
+        book.setPrice(5);
+        int price = book.getPrice();
+        Assert.assertEquals(price, 5);
+    }
+
+    @Test
+    public void testSetItemQuantity() {
+        book.setQuantity(20);
+        Assert.assertEquals(book.getQuantity(),20);
+    }
+
+    @Test
+    public void testGetItemQuantity() {
+        book.setQuantity(20);
+        int quantity = book.getQuantity();
+        Assert.assertEquals(quantity, 20);
+    }
+
+    @Test
+    public void testSetItemExpiry() {
+        book.setExpiryDate("April 10 2024");
+        Assert.assertEquals(book.getExpiryDate(), "April 10 2024");
+    }
+
+    @Test
+    public void testGetItemExpiry() {
+        book.setExpiryDate("April 10 2024");
+        String expiry = book.getExpiryDate();
+        Assert.assertEquals(expiry, "April 10 2024");
+    }
+
+
+
+    
 
 
     //Book Test Cases
@@ -99,14 +200,6 @@ public class ItemTestCases {
         String ISBN = book.getISBN();
         Assert.assertEquals(ISBN, "!@#");
     }
-
-
-
-
-
-
-
-
 
 
     //CD Test Cases
@@ -370,6 +463,85 @@ public class ItemTestCases {
         Assert.assertEquals(ISBN, "!@#");
     }
 
+
+
+    //Newsletter Test Cases
+    @Test
+    public void testSetNewsName() {
+        news.setNewsLetterName("Name");
+        Assert.assertEquals(news.getNewsLetterName(), "Name");
+    }
+
+    @Test
+    public void testGetNewsName() {
+        news.setNewsLetterName("Name");
+        String name = news.getNewsLetterName();
+        Assert.assertEquals(name, "Name");
+    }
+
+    @Test
+    public void testSetNewsArticleTitle() {
+        news.setArticleTitle("Title");
+        Assert.assertEquals(news.getArticleTitle(), "Title");
+    }
+
+
+    @Test
+    public void testGetNewsArticleTitle() {
+        news.setArticleTitle("Title");
+        String title = news.getArticleTitle();
+        Assert.assertEquals(title, "Title");
+    }
+
+    @Test
+    public void testSetNewsArticleTitleNumbers() {
+        news.setArticleTitle("123");
+        Assert.assertEquals(news.getArticleTitle(), "123");
+    }
+
+    @Test
+    public void testGetNewsArticleTitleNumbers() {
+        news.setArticleTitle("123");
+        String title = news.getArticleTitle();
+        Assert.assertEquals(title, "123");
+    }
+
+    @Test
+    public void testSetNewsArticleTitleSpecChar() {
+        news.setArticleTitle("!@#");
+        Assert.assertEquals(news.getArticleTitle(), "!@#");
+    }
+
+    @Test
+    public void testGetNewsArticleTitleSpecChar() {
+        news.setArticleTitle("!@#");
+        String title = news.getArticleTitle();
+        Assert.assertEquals(title, "!@#");
+    }
+
+    @Test
+    public void testSetNewsURL() {
+        news.setUrl("URL");
+        Assert.assertEquals(news.getUrl(), "URL");
+    }
+
+    @Test
+    public void testGetNewsURL() {
+        news.setUrl("URL");
+        String URL = news.getUrl();
+        Assert.assertEquals(URL, "URL");
+    }
+
+    // ItemFactory test cases
+    @Test
+    public void testItemFactory() {
+        ItemFactory itemFactory = new ItemFactory();
+        String bookID = "100000006";
+        String name = "spider man 3";
+        // Add all attributes to record
+        List<String> record = new ArrayList();
+        Item item = itemFactory.createItem("Book", record);
+    }
 
 
 

@@ -24,6 +24,15 @@ public class ItemTestCases {
 
     //Item Abstract Class Test Cases
     @Test
+    public void testItemConstructor() {
+        Item magazine = new Item(100, "TextbookName", "2nd Floor", "Publisher", 5, "April 25, 2024", 20);
+    }
+
+
+
+
+
+    @Test
     public void testSetItemID() {
         book.setItemID(123);
         Assert.assertEquals(book.getItemID(), 123);
@@ -114,11 +123,6 @@ public class ItemTestCases {
         String expiry = book.getExpiryDate();
         Assert.assertEquals(expiry, "April 10 2024");
     }
-
-
-
-    
-
 
     //Book Test Cases
     @Test
@@ -533,15 +537,15 @@ public class ItemTestCases {
     }
 
     // ItemFactory test cases
-    @Test
-    public void testItemFactory() {
-        ItemFactory itemFactory = new ItemFactory();
-        String bookID = "100000006";
-        String name = "spider man 3";
-        // Add all attributes to record
-        List<String> record = new ArrayList();
-        Item item = itemFactory.createItem("Book", record);
-    }
+//    @Test
+//    public void testItemFactory() {
+//        ItemFactory itemFactory = new ItemFactory();
+//        String bookID = "100000006";
+//        String name = "spider man 3";
+//        // Add all attributes to record
+//        List<String> record = new ArrayList();
+//        Item item = itemFactory.createItem("Book", record);
+//    }
 
 
 

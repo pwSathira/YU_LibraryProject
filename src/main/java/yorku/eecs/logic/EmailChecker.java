@@ -6,7 +6,7 @@ public class EmailChecker {
         this.email = email;
     }
 
-    public void setEmail(String password){
+    public void setEmail(String email){
         this.email = email;
     }
     public String getEmail(){

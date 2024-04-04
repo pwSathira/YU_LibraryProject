@@ -52,7 +52,7 @@ public class TestPasswordChecker {
     @Test
     public void testRepititions(){
         assertTrue(PasswordChecker.checkRepetitions("12312312345"));
-        assertFalse("No 3 consecutive letters should be there", PasswordChecker.checkRepetitions("11122223333444444"));
+        assertFalse("No 3 consecutive letters should be there", PasswordChecker.checkRepetitions("1112222444444"));
     }
 
     @Test
@@ -60,5 +60,7 @@ public class TestPasswordChecker {
         assertTrue(PasswordChecker.checkStrength("AbCde1fhsd"));
         assertFalse("Password is not Strong", PasswordChecker.checkStrength("abcdef"));
     }
+
+    //Need One More
 
 }

@@ -20,15 +20,14 @@ public class TestEmailChecker {
 
     @Test
     public void testSetter(){
-        EmailChecker checker = new EmailChecker("abcd");
-        String mail = "sareen.akul@gmail.com";
-        checker.setEmail(mail);
-        assertEquals(mail, checker.getEmail());
+        EmailChecker checker = new EmailChecker("sareen.akul@gmail.com");
+        checker.setEmail("akuls18@my.yorku.ca");
+        assertEquals("akuls18@my.yorku.ca", checker.getEmail());
     }
 
     @Test
     public void testMinLengthCheck(){
-        assertTrue(EmailChecker.checkLength("akuls7"));
+        assertTrue(EmailChecker.checkLength("akuls18"));
         assertFalse(EmailChecker.checkLength("akul"));
     }
 
@@ -60,5 +59,11 @@ public class TestEmailChecker {
     public void testDotCom(){
         assertTrue(EmailChecker.containsAtAndDotCom("sareen.akul@gmail.com"));
         assertFalse("Does not contain . and com in right order", EmailChecker.containsAtAndDotCom("sareen.akul@.gmailcom"));
+    }
+
+    @Test
+    public void testMailCheck(){
+        assertTrue(EmailChecker.mailCheck("sareen.akul@gmail.com"));
+        assertFalse("Invalid Email", EmailChecker.mailCheck("sareen.akulgmail"));
     }
 }

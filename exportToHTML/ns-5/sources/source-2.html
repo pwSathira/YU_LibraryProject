@@ -1,0 +1,194 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > NewsletterController</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">yorku.eecs.controller.item</a>
+</div>
+
+<h1>Coverage Summary for Class: NewsletterController (yorku.eecs.controller.item)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">NewsletterController</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    20%
+  </span>
+  <span class="absValue">
+    (1/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    4.3%
+  </span>
+  <span class="absValue">
+    (2/46)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package yorku.eecs.controller.item;
+&nbsp;
+&nbsp;import yorku.eecs.logic.CsvUtil;
+&nbsp;import yorku.eecs.model.item.Item;
+&nbsp;import yorku.eecs.model.user.User;
+&nbsp;
+&nbsp;import javax.swing.*;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.List;
+&nbsp;import java.util.stream.Collectors;
+&nbsp;import java.io.BufferedReader;
+&nbsp;import java.io.BufferedWriter;
+&nbsp;import java.io.FileReader;
+&nbsp;import java.io.FileWriter;
+&nbsp;import java.io.IOException;
+&nbsp;import java.io.PrintWriter;
+&nbsp;
+<b class="fc">&nbsp;public class NewsletterController {</b>
+&nbsp;
+<b class="fc">&nbsp;    private final String path = &quot;src/main/resources/data/newsletterdata.csv&quot;;</b>
+&nbsp;
+&nbsp;    public void subscribe(User user, String newsletter) {
+&nbsp;        try{
+<b class="nc">&nbsp;            user.getSubscribedList().add(newsletter);</b>
+<b class="nc">&nbsp;            String id = user.getStringId();</b>
+<b class="nc">&nbsp;            List&lt;String&gt; records = CsvUtil.getRecordByColumn(path, id, 0);</b>
+<b class="nc">&nbsp;            if (records != null) {</b>
+&nbsp;                //Update entry
+<b class="nc">&nbsp;                List&lt;String&gt; modifiableRecords = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;                modifiableRecords.add(0, user.getStringId());</b>
+<b class="nc">&nbsp;                modifiableRecords.add(1, serializeNewsletterList(user.getSubscribedList()));</b>
+<b class="nc">&nbsp;                CsvUtil.removeRecordByColumn(path, id, 0);</b>
+<b class="nc">&nbsp;                CsvUtil.writeCsv(Arrays.asList(modifiableRecords), path, true);</b>
+<b class="nc">&nbsp;            } else {</b>
+&nbsp;                //Create new entry
+<b class="nc">&nbsp;                List&lt;List&lt;String&gt;&gt; newRecord = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;                newRecord.add(Arrays.asList(id, serializeNewsletterList(user.getSubscribedList())));</b>
+<b class="nc">&nbsp;                CsvUtil.writeCsv(newRecord, path, true);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }catch (Exception e) {</b>
+<b class="nc">&nbsp;            e.printStackTrace();</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private String serializeNewsletterList(ArrayList&lt;String&gt; subscribedList) {
+<b class="nc">&nbsp;        return String.join(&quot;,&quot;, subscribedList);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void unsubscribe(User user, String newsletter) {
+<b class="nc">&nbsp;        getSubscribeList(user);</b>
+<b class="nc">&nbsp;        List&lt;String&gt; subscribeList = user.getSubscribedList();</b>
+<b class="nc">&nbsp;        subscribeList.remove(newsletter);</b>
+&nbsp;        try{
+<b class="nc">&nbsp;            String id = user.getStringId();</b>
+<b class="nc">&nbsp;            List&lt;String&gt; records = CsvUtil.getRecordByColumn(path, id, 0);</b>
+<b class="nc">&nbsp;            if (records != null) {</b>
+&nbsp;                //Update entry
+<b class="nc">&nbsp;                List&lt;String&gt; modifiableRecords = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;                modifiableRecords.add(0, user.getStringId());</b>
+<b class="nc">&nbsp;                modifiableRecords.add(1, serializeNewsletterList(user.getSubscribedList()));</b>
+<b class="nc">&nbsp;                CsvUtil.removeRecordByColumn(path, id, 0);</b>
+<b class="nc">&nbsp;                CsvUtil.writeCsv(Arrays.asList(modifiableRecords), path, true);</b>
+<b class="nc">&nbsp;            } else {</b>
+&nbsp;                //Throw error that user does not exist
+<b class="nc">&nbsp;                System.out.println(&quot;User does not exist&quot;);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }catch (Exception e){</b>
+<b class="nc">&nbsp;            e.printStackTrace();</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //Get subscribe list
+&nbsp;    public User getSubscribeList(User user) {
+&nbsp;        try {
+<b class="nc">&nbsp;            String id = user.getStringId();</b>
+<b class="nc">&nbsp;            List&lt;String&gt; records = CsvUtil.getRecordByColumn(path, id, 0);</b>
+<b class="nc">&nbsp;            if (records != null) {</b>
+<b class="nc">&nbsp;                ArrayList&lt;String&gt; subscribedList = new ArrayList&lt;&gt;(Arrays.asList(records.get(1).split(&quot;,&quot;)));</b>
+<b class="nc">&nbsp;                user.setSubscribedList(subscribedList);</b>
+<b class="nc">&nbsp;            } else {</b>
+<b class="nc">&nbsp;                user.setSubscribedList(new ArrayList&lt;&gt;());</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } catch (Exception e) {</b>
+<b class="nc">&nbsp;            e.printStackTrace();</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return user;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-06 19:56</div>
+</div>
+</body>
+</html>

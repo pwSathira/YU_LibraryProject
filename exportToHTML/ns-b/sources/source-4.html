@@ -1,0 +1,152 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > Student</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">yorku.eecs.model.user</a>
+</div>
+
+<h1>Coverage Summary for Class: Student (yorku.eecs.model.user)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Student</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    33.3%
+  </span>
+  <span class="absValue">
+    (2/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    27.3%
+  </span>
+  <span class="absValue">
+    (3/11)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package yorku.eecs.model.user;
+&nbsp;
+&nbsp;import yorku.eecs.model.Course;
+&nbsp;import yorku.eecs.model.item.Book;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;
+&nbsp;public class Student extends User {
+&nbsp;    private ArrayList&lt;Course&gt; courseList;
+&nbsp;
+&nbsp;    public Student() {
+<b class="fc">&nbsp;        super();</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public Student(ArrayList&lt;Course&gt; courseList){</b>
+<b class="nc">&nbsp;        this.courseList = courseList;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Student(int id, String userName, String firstName, String lastName, String emailAddress, String password) {
+<b class="nc">&nbsp;        super(Integer.toString(id),password);</b>
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    //GETTERS
+&nbsp;    public List&lt;Course&gt; getCourseList() {
+<b class="nc">&nbsp;        return courseList;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //SETTERS
+&nbsp;    public void setCourseList(ArrayList&lt;Course&gt; courseList) {
+<b class="nc">&nbsp;        this.courseList = courseList;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ArrayList&lt;Book&gt; getCourseBook() {
+&nbsp;        /* creates an ArrayList of Books that will add books
+&nbsp;           to the ArrayList by getting the books from the CourseList
+&nbsp;        * */
+<b class="fc">&nbsp;        ArrayList&lt;Book&gt; bookList = new ArrayList&lt;Book&gt;();</b>
+<b class="fc">&nbsp;        for (Course course : courseList) {</b>
+<b class="nc">&nbsp;            bookList.add(course.getTextbook());</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return bookList;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-06 19:56</div>
+</div>
+</body>
+</html>

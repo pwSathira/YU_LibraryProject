@@ -1,10 +1,12 @@
 package yorku.eecs.testing;
 
+import org.junit.Assert;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
 import yorku.eecs.model.user.*;
 import yorku.eecs.model.item.*;
+import yorku.eecs.model.user.Student;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,11 +26,19 @@ public class UserTestCases {
     Textbook text = new Textbook.Builder().build();
 
     Admin admin = new Admin(1000000000, "Admin", "FirstName", "LastName", "email", "Password");
-    Faculty faculty = new Faculty();
-    NonFaculty nonFaculty = new NonFaculty();
+    Faculty faculty = new Faculty(2000000000, "Faculty", "FirstName", "LastName", "email", "Password");
+    NonFaculty nf = new NonFaculty(2000000001, "NF", "FirstName", "LastName", "email", "Password");
 
-    Student student = new Student();
+    Student student = new Student(2000000002, "Student", "FirstName", "LastName", "email", "Password");
 
+
+
+    //Faculty
+    @Test
+    public void testSetFirstNameFaculty() {
+        faculty.setFirstName("Test");
+        Assert.assertEquals(faculty.getFirstName(), "Test");
+    }
 
     @Test
     public void testSetFirstName() {
@@ -168,31 +178,31 @@ public class UserTestCases {
         }
     }
 
-    @Test
-    public void testToCSV() {
-        user.setId(777);
-        user.setUserName("JDMAN");
-        user.setFirstName("John");
-        user.setLastName("Doe");
-        user.setEmailAddress("JohnDoe@gmail.com");
-        user.setPassword("123");
-
-        ArrayList<String> tempList = new ArrayList<>();
-        tempList.add(Integer.toString(user.getId()));
-        tempList.add(user.getUserName());
-        tempList.add(user.getFirstName());
-        tempList.add(user.getLastName());
-        tempList.add(user.getEmailAddress());
-        tempList.add(user.getPassword());
-
-        List<List<String>> tempList2 =  user.toCSV(777);
-
-        for (int i = 0; i < tempList2.get(0).size(); i++) {
-            assertEquals();
-        }
-
-
-    }
+//    @Test
+//    public void testToCSV() {
+//        user.setId(777);
+//        user.setUserName("JDMAN");
+//        user.setFirstName("John");
+//        user.setLastName("Doe");
+//        user.setEmailAddress("JohnDoe@gmail.com");
+//        user.setPassword("123");
+//
+//        ArrayList<String> tempList = new ArrayList<>();
+//        tempList.add(Integer.toString(user.getId()));
+//        tempList.add(user.getUserName());
+//        tempList.add(user.getFirstName());
+//        tempList.add(user.getLastName());
+//        tempList.add(user.getEmailAddress());
+//        tempList.add(user.getPassword());
+//
+//        List<List<String>> tempList2 =  user.toCSV(777);
+//
+//        for (int i = 0; i < tempList2.get(0).size(); i++) {
+//            assertEquals();
+//        }
+//
+//
+//    }
 
     @Test
     public void setStudentCourseList() {
@@ -202,4 +212,62 @@ public class UserTestCases {
 
 
 
+    //Student Test Cases:-
+    @Test
+    public void testStudenConstructor(){}
+
+
+
+    @Test
+    public void testVisitorConstructor() {
+        Visitor visitor = new Visitor("123", "123");
+        assertEquals(visitor.getId(),123);
+        assertEquals(visitor.getPassword(),"123)");
+    }
+
+    @Test
+    public void testNonFacultyCreation() {
+        NonFaculty nonFaculty = new NonFaculty(300000000, "NonFaculty", "FirstName", "LastName", "email", "Password");;
+        nonFaculty.setUserName("johnDoe");
+        nonFaculty.setFirstName("John");
+        nonFaculty.setLastName("Doe");
+        nonFaculty.setPassword("123456");
+        nonFaculty.setId(1);
+        nonFaculty.setEmailAddress("johndoe@example.com");
+
+        assertEquals("johnDoe", nonFaculty.getUserName());
+        assertEquals("John", nonFaculty.getFirstName());
+        assertEquals("Doe", nonFaculty.getLastName());
+        assertEquals("123456", nonFaculty.getPassword());
+        assertEquals(1, nonFaculty.getId());
+        assertEquals("johndoe@example.com", nonFaculty.getEmailAddress());
+    }
+
+    @Test
+    public void testNonFacultySubscriptions() {
+        NonFaculty nonFaculty = new NonFaculty(300000000, "NonFaculty", "FirstName", "LastName", "email", "Password");
+        ArrayList<String> subscriptions = new ArrayList<>();
+        subscriptions.add("Java Programming");
+        subscriptions.add("Data Structures");
+
+        nonFaculty.setSubscribedList(subscriptions);
+
+        assertEquals(2, nonFaculty.getSubscribedList().size());
+        assertEquals("Java Programming", nonFaculty.getSubscribedList().get(0));
+        assertEquals("Data Structures", nonFaculty.getSubscribedList().get(1));
+    }
+
+    @Test
+    public void testNonFacultyRentList() {
+        NonFaculty nonFaculty = new NonFaculty(300000000, "NonFaculty", "FirstName", "LastName", "email", "Password");;
+        ArrayList<Item> rentList = new ArrayList<>();
+        rentList.add(new Book(new Book.Builder()));
+        rentList.add(new Book(new Book.Builder()));
+        rentList.get(0).setItemName("Laptop");
+        rentList.get(1).setItemName("Projector");
+        nonFaculty.setRentList(rentList);
+        assertEquals(2, nonFaculty.getRentList().size());
+        assertEquals("Laptop", nonFaculty.getRentList().get(0).getItemName());
+        assertEquals("Projector", nonFaculty.getRentList().get(1).getItemName());
+    }
 }

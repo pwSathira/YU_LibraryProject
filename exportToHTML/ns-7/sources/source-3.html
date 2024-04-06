@@ -1,0 +1,166 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > CsvUtil</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">yorku.eecs.logic</a>
+</div>
+
+<h1>Coverage Summary for Class: CsvUtil (yorku.eecs.logic)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CsvUtil</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (4/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    67.6%
+  </span>
+  <span class="absValue">
+    (23/34)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package yorku.eecs.logic;
+&nbsp;
+&nbsp;import java.io.*;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.List;
+&nbsp;
+<b class="nc">&nbsp;public class CsvUtil {</b>
+&nbsp;    // Read from a CSV file
+&nbsp;    public static List&lt;List&lt;String&gt;&gt; readCsv(String filePath) throws CSVError {
+<b class="fc">&nbsp;        List&lt;List&lt;String&gt;&gt; records = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {</b>
+&nbsp;            String line;
+<b class="fc">&nbsp;            while ((line = br.readLine()) != null) {</b>
+<b class="fc">&nbsp;                String[] values = line.split(&quot;,&quot;);</b>
+<b class="fc">&nbsp;                records.add(Arrays.asList(values));</b>
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;        } catch (IOException e) {</b>
+<b class="fc">&nbsp;            throw new CSVError(&quot;Error reading CSV file&quot;, e);</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        return records;</b>
+&nbsp;    }
+&nbsp;    // Write to a CSV file
+&nbsp;    public static void writeCsv(List&lt;List&lt;String&gt;&gt; records, String filePath, boolean append) throws CSVError {
+<b class="fc">&nbsp;        try (PrintWriter pw = new PrintWriter(new FileWriter(filePath, append))) {</b>
+<b class="fc">&nbsp;            for (List&lt;String&gt; record : records) {</b>
+<b class="fc">&nbsp;                pw.println(String.join(&quot;,&quot;, record));</b>
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;        } catch (IOException e) {</b>
+<b class="nc">&nbsp;            throw new CSVError(&quot;Error writing to CSV file&quot;, e);</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;    // Get the last instance from the CSV file, from a specified column
+&nbsp;    public static String getLastInstanceByColumn(String filePath, int columnIndex) throws CSVError {
+<b class="fc">&nbsp;        List&lt;List&lt;String&gt;&gt; records = readCsv(filePath);</b>
+<b class="nc">&nbsp;        if (!records.isEmpty() &amp;&amp; records.get(records.size() - 1).size() &gt; columnIndex) {</b>
+<b class="nc">&nbsp;            return records.get(records.size() - 1).get(columnIndex);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;    // Get a record by a specified value in any specified column
+&nbsp;    public static List&lt;String&gt; getRecordByColumn(String filePath, String searchValue, int columnIndex) throws CSVError {
+<b class="fc">&nbsp;        List&lt;List&lt;String&gt;&gt; records = readCsv(filePath);</b>
+<b class="fc">&nbsp;        for (List&lt;String&gt; record : records) {</b>
+<b class="fc">&nbsp;            if (record.size() &gt; columnIndex &amp;&amp; record.get(columnIndex).equals(searchValue)) {</b>
+<b class="fc">&nbsp;                return record;</b>
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;    //Remove specified record from CSV file
+&nbsp;    public static void removeRecordByColumn(String filePath, String searchValue, int columnIndex) throws CSVError {
+<b class="nc">&nbsp;        List&lt;List&lt;String&gt;&gt; records = readCsv(filePath);</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; records.size(); i++) {</b>
+<b class="nc">&nbsp;            if (records.get(i).size() &gt; columnIndex &amp;&amp; records.get(i).get(columnIndex).equals(searchValue)) {</b>
+<b class="nc">&nbsp;                records.remove(i);</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        writeCsv(records, filePath, false);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-06 19:56</div>
+</div>
+</body>
+</html>

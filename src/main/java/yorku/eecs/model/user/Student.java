@@ -10,6 +10,20 @@ import java.util.List;
 public class Student extends User {
     private ArrayList<Course> courseList;
 
+    public Student() {
+        super();
+    }
+
+    public Student(ArrayList<Course> courseList){
+        this.courseList = courseList;
+    }
+
+    public Student(int id, String userName, String firstName, String lastName, String emailAddress, String password) {
+        super(Integer.toString(id),password);
+
+    }
+
+
     //GETTERS
     public List<Course> getCourseList() {
         return courseList;

@@ -1,0 +1,174 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > CD_DVD</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">yorku.eecs.model.item</a>
+</div>
+
+<h1>Coverage Summary for Class: CD_DVD (yorku.eecs.model.item)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CD_DVD</td>
+<td class="coverageStat">
+  <span class="percent">
+    25%
+  </span>
+  <span class="absValue">
+    (1/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    20%
+  </span>
+  <span class="absValue">
+    (1/5)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">CD_DVD$Builder</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    11.1%
+  </span>
+  <span class="absValue">
+    (1/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    9.1%
+  </span>
+  <span class="absValue">
+    (1/11)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package yorku.eecs.model.item;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;//Concrete Builder
+&nbsp;
+&nbsp;public class CD_DVD extends Item{
+&nbsp;
+&nbsp;    private String UPC;
+&nbsp;
+&nbsp;    public CD_DVD(Builder builder){
+<b class="fc">&nbsp;        super(builder);</b>
+<b class="nc">&nbsp;        this.UPC = builder.UPC;</b>
+&nbsp;    }
+&nbsp;    //getter
+<b class="nc">&nbsp;    public String getUPC() { return this.UPC; }</b>
+&nbsp;
+&nbsp;    //setter
+<b class="nc">&nbsp;    public void setUPC(String UPC) { this.UPC = UPC; }</b>
+&nbsp;
+&nbsp;    //To CSV Method
+&nbsp;    @Override
+&nbsp;    protected void getExtraCSV(List&lt;String&gt; rowData) {
+<b class="nc">&nbsp;        rowData.add(UPC);</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public static class Builder extends Item.Builder&lt;Builder&gt; {</b>
+&nbsp;        private String UPC;
+&nbsp;
+&nbsp;        public Builder() {
+<b class="nc">&nbsp;            super();</b>
+&nbsp;        }
+&nbsp;        public Builder UPC(String UPC) {
+<b class="nc">&nbsp;            this.UPC = UPC;</b>
+<b class="nc">&nbsp;            return self();</b>
+&nbsp;        }
+&nbsp;        public CD_DVD build() {
+<b class="nc">&nbsp;            return new CD_DVD(this);</b>
+&nbsp;        }
+&nbsp;        @Override
+&nbsp;        protected Builder self() {
+<b class="nc">&nbsp;            return this;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-06 19:56</div>
+</div>
+</body>
+</html>

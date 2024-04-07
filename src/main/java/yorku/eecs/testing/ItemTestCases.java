@@ -532,15 +532,32 @@ public class ItemTestCases {
         Assert.assertEquals(URL, "URL");
     }
 
+    Book itemForTesting;
     // ItemFactory test cases
     @Test
     public void testItemFactory() {
         ItemFactory itemFactory = new ItemFactory();
         String bookID = "100000006";
         String name = "spider man 3";
-        // Add all attributes to record
+        String location = "Library";
+        String publisher = "Marvel Comics";
+        String price = "4";
+        String quantity = "20";
+        String date = "DATE";
+        String ISBN = "123";
+        String[] arr = {bookID, name, location, publisher, price, quantity, date, ISBN};
         List<String> record = new ArrayList();
-        Item item = itemFactory.createItem("Book", record);
+        for (int i = 0; i < arr.length; i++) {
+            record.add(arr[i]);
+        }
+        // Add all attributes to record
+        this.itemForTesting = (Book) itemFactory.createItem("Book", record);
+        this.itemForTesting.setISBN(ISBN);
+        String[] arr2 = {this.itemForTesting.getStringId(), this.itemForTesting.getItemName(), this.itemForTesting.getLocation(),
+                this.itemForTesting.getPublisher(), Integer.toString(this.itemForTesting.getPrice()), Integer.toString(this.itemForTesting.getQuantity()),
+                this.itemForTesting.getExpiryDate(), this.itemForTesting.getISBN()};
+
+        Assert.assertEquals(arr, arr2);
     }
 
 

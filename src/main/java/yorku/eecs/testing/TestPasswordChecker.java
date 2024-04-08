@@ -43,6 +43,7 @@ public class TestPasswordChecker {
         assertFalse("Must contain atleast 1 lower case", PasswordChecker.checkLowerCase("ALLISWELL"));
     }
 
+
     @Test
     public void testDigit(){
         assertTrue(PasswordChecker.checkDigit("Allis11"));
@@ -61,6 +62,13 @@ public class TestPasswordChecker {
         assertFalse("Password is not Strong", PasswordChecker.checkStrength("abcdef"));
     }
 
-    //Need One More
+
+    @Test
+    public void testNumberPasswordStrength(){
+        assertTrue(PasswordChecker.checkStrength("123456789"));
+        assertFalse("Password is not Strong", PasswordChecker.checkStrength("123"));
+    }
+
+
 
 }

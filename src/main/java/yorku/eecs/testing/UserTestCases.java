@@ -31,14 +31,454 @@ public class UserTestCases {
 
     Student student = new Student(2000000002, "Student", "FirstName", "LastName", "email", "Password");
 
+    Visitor visitor = new Visitor("ID", "Password");
+
 
 
     //Faculty
     @Test
     public void testSetFirstNameFaculty() {
-        faculty.setFirstName("Test");
-        Assert.assertEquals(faculty.getFirstName(), "Test");
+        faculty.setFirstName("FirstName");
+        Assert.assertEquals(faculty.getFirstName(), "FirstName");
     }
+
+    @Test
+    public void testGetFirstNameFaculty() {
+        faculty.setFirstName("FirstName");
+        String firstName = faculty.getFirstName();
+
+        assertEquals(firstName, "FirstName");
+    }
+
+    @Test
+    public void testSetUserNameFaculty() {
+        faculty.setUserName("Faculty");
+
+        assertEquals(faculty.getUserName(), "Faculty");
+    }
+
+    @Test
+    public void testGetUserNameFaculty() {
+        faculty.setUserName("Faculty");
+        String userName = faculty.getUserName();
+
+        assertEquals(userName, "Faculty");
+    }
+
+    @Test
+    public void testSetLastNameFaculty() {
+        faculty.setLastName("LastName");
+
+        assertEquals(faculty.getLastName(), "LastName");
+    }
+
+    @Test
+    public void testGetLastNameFaculty() {
+        faculty.setLastName("LastName");
+        String lastName = faculty.getLastName();
+
+        assertEquals(lastName, "LastName");
+    }
+    @Test
+    public void testSetPasswordNameFaculty() {
+        faculty.setPassword("Password");
+
+        assertEquals(faculty.getPassword(), "Password");
+    }
+
+    @Test
+    public void testGetPasswordFaculty() {
+        faculty.setPassword("Password");
+        String password = faculty.getPassword();
+
+        assertEquals(password, "Password");
+    }
+    @Test
+    public void testSetIdFaculty() {
+        faculty.setId(2000000000);
+
+        assertEquals(faculty.getId(), 2000000000);
+    }
+
+    @Test
+    public void testGetIdFaculty() {
+        faculty.setId(2000000000);
+        int id = faculty.getId();
+
+        assertEquals(id, 2000000000);
+    }
+    @Test
+    public void testSetEmailAddressFaculty() {
+        faculty.setEmailAddress("email");
+
+        assertEquals(faculty.getEmailAddress(), "email");
+    }
+
+    @Test
+    public void testGetEmailAddressFaculty() {
+        faculty.setEmailAddress("email");
+        String emailAddress = faculty.getEmailAddress();
+
+        assertEquals(emailAddress, "email");
+    }
+
+    //Non-Faculty
+    @Test
+    public void testSetFirstNameNonFaculty() {
+        nf.setFirstName("FirstName");
+        Assert.assertEquals(nf.getFirstName(), "FirstName");
+    }
+
+    @Test
+    public void testGetFirstNameNonFaculty() {
+        nf.setFirstName("FirstName");
+        String firstName = nf.getFirstName();
+
+        assertEquals(firstName, "FirstName");
+    }
+
+    @Test
+    public void testSetUserNameNonFaculty() {
+        nf.setUserName("NF");
+
+        assertEquals(nf.getUserName(), "NF");
+    }
+
+    @Test
+    public void testGetUserNameNonFaculty() {
+        nf.setUserName("NF");
+        String userName = nf.getUserName();
+
+        assertEquals(userName, "NF");
+    }
+
+    @Test
+    public void testSetLastNameNonFaculty() {
+        nf.setLastName("LastName");
+
+        assertEquals(nf.getLastName(), "LastName");
+    }
+
+    @Test
+    public void testGetLastNameNonFaculty() {
+        nf.setLastName("LastName");
+        String lastName = nf.getLastName();
+
+        assertEquals(lastName, "LastName");
+    }
+    @Test
+    public void testSetPasswordNameNonFaculty() {
+        nf.setPassword("Password");
+
+        assertEquals(nf.getPassword(), "Password");
+    }
+
+    @Test
+    public void testGetPasswordNonFaculty() {
+        nf.setPassword("Password");
+        String password = nf.getPassword();
+
+        assertEquals(password, "Password");
+    }
+    @Test
+    public void testSetIdNonFaculty() {
+        nf.setId(2000000001);
+
+        assertEquals(nf.getId(), 2000000001);
+    }
+
+    @Test
+    public void testGetIdNonFaculty() {
+        nf.setId(2000000000);
+        int id = nf.getId();
+
+        assertEquals(id, 2000000001);
+    }
+    @Test
+    public void testSetEmailAddressNonFaculty() {
+        nf.setEmailAddress("email");
+
+        assertEquals(nf.getEmailAddress(), "email");
+    }
+
+    @Test
+    public void testGetEmailAddressNonFaculty() {
+        nf.setEmailAddress("email");
+        String emailAddress = nf.getEmailAddress();
+
+        assertEquals(emailAddress, "email");
+    }
+
+
+    //Visitor
+    @Test
+    public void testSetFirstNameVisitor() {
+        visitor.setFirstName("FirstName");
+        Assert.assertEquals(visitor.getFirstName(), "FirstName");
+    }
+
+    @Test
+    public void testGetFirstNameVisitor() {
+        visitor.setFirstName("FirstName");
+        String firstName = visitor.getFirstName();
+
+        assertEquals(firstName, "FirstName");
+    }
+
+    @Test
+    public void testSetUserNameVisitor() {
+        visitor.setUserName("Visitor");
+
+        assertEquals(visitor.getUserName(), "Visitor");
+    }
+
+    @Test
+    public void testGetUserNameVisitor() {
+        visitor.setUserName("Visitor");
+        String userName = visitor.getUserName();
+
+        assertEquals(userName, "Visitor");
+    }
+
+    @Test
+    public void testSetLastNameVisitor() {
+        visitor.setLastName("LastName");
+
+        assertEquals(visitor.getLastName(), "LastName");
+    }
+
+    @Test
+    public void testGetLastNameVisitor() {
+        visitor.setLastName("LastName");
+        String lastName = visitor.getLastName();
+
+        assertEquals(lastName, "LastName");
+    }
+    @Test
+    public void testSetPasswordNameVisitor() {
+        visitor.setPassword("Password");
+
+        assertEquals(visitor.getPassword(), "Password");
+    }
+
+    @Test
+    public void testGetPasswordVisitor() {
+        visitor.setPassword("Password");
+        String password = visitor.getPassword();
+
+        assertEquals(password, "Password");
+    }
+    @Test
+    public void testSetIdVisitor() {
+        visitor.setId(2000000005);
+
+        assertEquals(visitor.getId(), 2000000005);
+    }
+
+    @Test
+    public void testGetIdVisitor() {
+        nf.setId(2000000005);
+        int id = nf.getId();
+
+        assertEquals(id, 2000000005);
+    }
+    @Test
+    public void testSetEmailAddressVisitor() {
+        visitor.setEmailAddress("email");
+
+        assertEquals(visitor.getEmailAddress(), "email");
+    }
+
+    @Test
+    public void testGetEmailAddressVisitor() {
+        visitor.setEmailAddress("email");
+        String emailAddress = visitor.getEmailAddress();
+
+        assertEquals(emailAddress, "email");
+    }
+
+
+    //Student
+    @Test
+    public void testSetFirstNameStudent() {
+        student.setFirstName("FirstName");
+        Assert.assertEquals(student.getFirstName(), "FirstName");
+    }
+
+    @Test
+    public void testGetFirstNameStudent() {
+        student.setFirstName("FirstName");
+        String firstName = student.getFirstName();
+
+        assertEquals(firstName, "FirstName");
+    }
+
+    @Test
+    public void testSetUserNameStudent() {
+        student.setUserName("Student");
+
+        assertEquals(student.getUserName(), "Student");
+    }
+
+    @Test
+    public void testGetUserNameStudent() {
+        student.setUserName("Student");
+        String userName = student.getUserName();
+
+        assertEquals(userName, "Student");
+    }
+
+    @Test
+    public void testSetLastNameStudent() {
+        student.setLastName("LastName");
+
+        assertEquals(student.getLastName(), "LastName");
+    }
+
+    @Test
+    public void testGetLastNameStudent() {
+        student.setLastName("LastName");
+        String lastName = student.getLastName();
+
+        assertEquals(lastName, "LastName");
+    }
+    @Test
+    public void testSetPasswordNameStudent() {
+        student.setPassword("Password");
+
+        assertEquals(student.getPassword(), "Password");
+    }
+
+    @Test
+    public void testGetPasswordStudent() {
+        student.setPassword("Password");
+        String password = student.getPassword();
+
+        assertEquals(password, "Password");
+    }
+    @Test
+    public void testSetIdStudent() {
+        student.setId(2000000002);
+
+        assertEquals(student.getId(), 2000000002);
+    }
+
+    @Test
+    public void testGetIdStudent() {
+        student.setId(2000000002);
+        int id = student.getId();
+
+        assertEquals(id, 2000000002);
+    }
+    @Test
+    public void testSetEmailAddressStudent() {
+        student.setEmailAddress("email");
+
+        assertEquals(student.getEmailAddress(), "email");
+    }
+
+    @Test
+    public void testGetEmailAddressStudent() {
+        student.setEmailAddress("email");
+        String emailAddress = student.getEmailAddress();
+
+        assertEquals(emailAddress, "email");
+    }
+
+    //Admin
+    @Test
+    public void testSetFirstNameAdmin() {
+        admin.setFirstName("FirstName");
+        Assert.assertEquals(admin.getFirstName(), "FirstName");
+    }
+
+    @Test
+    public void testGetFirstNameAdmin() {
+        admin.setFirstName("FirstName");
+        String firstName = admin.getFirstName();
+
+        assertEquals(firstName, "FirstName");
+    }
+
+    @Test
+    public void testSetUserNameAdmin() {
+        admin.setUserName("Admin");
+
+        assertEquals(admin.getUserName(), "Admin");
+    }
+
+    @Test
+    public void testGetUserNameAdmin() {
+        admin.setUserName("Admin");
+        String userName = admin.getUserName();
+
+        assertEquals(userName, "Admin");
+    }
+
+    @Test
+    public void testSetLastNameAdmin() {
+        admin.setLastName("LastName");
+
+        assertEquals(admin.getLastName(), "LastName");
+    }
+
+    @Test
+    public void testGetLastNameAdmin() {
+        admin.setLastName("LastName");
+        String lastName = admin.getLastName();
+
+        assertEquals(lastName, "LastName");
+    }
+    @Test
+    public void testSetPasswordNameAdmin() {
+        admin.setPassword("Password");
+
+        assertEquals(admin.getPassword(), "Password");
+    }
+
+    @Test
+    public void testGetPasswordAdmin() {
+        admin.setPassword("Password");
+        String password = admin.getPassword();
+
+        assertEquals(password, "Password");
+    }
+    @Test
+    public void testSetIdAdmin() {
+        student.setId(1000000000);
+
+        assertEquals(student.getId(), 1000000000);
+    }
+
+    @Test
+    public void testGetIdAdmin() {
+        admin.setId(1000000000);
+        int id = admin.getId();
+
+        assertEquals(id, 1000000000);
+    }
+    @Test
+    public void testSetEmailAddressAdmin() {
+        admin.setEmailAddress("email");
+
+        assertEquals(admin.getEmailAddress(), "email");
+    }
+
+    @Test
+    public void testGetEmailAddressAdmin() {
+        admin.setEmailAddress("email");
+        String emailAddress = admin.getEmailAddress();
+
+        assertEquals(emailAddress, "email");
+    }
+
+
+
+
+
+
+
+    //User Test Cases
 
     @Test
     public void testSetFirstName() {
@@ -212,18 +652,7 @@ public class UserTestCases {
 
 
 
-    //Student Test Cases:-
-    @Test
-    public void testStudenConstructor(){}
 
-
-
-    @Test
-    public void testVisitorConstructor() {
-        Visitor visitor = new Visitor("123", "123");
-        assertEquals(visitor.getId(),123);
-        assertEquals(visitor.getPassword(),"123)");
-    }
 
     @Test
     public void testNonFacultyCreation() {

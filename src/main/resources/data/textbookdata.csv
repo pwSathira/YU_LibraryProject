@@ -1,3 +1,13 @@
 itemID,itemName,location,publisher,price,quantity,Edition,ExpiryDate,ISBN
 400000000,Calculus Early Transcendentals,Bookshelf,John Wiley & Sons,50,20,3/22,2024,8th Edition,9780470888612
 400000001,Organic Chemistry,Bookshelf,Prentice Hall,45,20,3/22/2024,7th Edition,9780131478824
+400000002,Magazine name,Library,Publisher,5,20,Date,null
+400000003,Magazine name,Library,Publisher,5,20,Date,null
+400000004,Magazine name,Library,Publisher,5,20,Date,null
+400000005,Magazine name,Library,Publisher,5,20,Date,null
+400000006,Magazine name,Library,Publisher,5,20,Date,null
+400000007,Magazine name,Library,Publisher,5,20,Date,null
+400000008,Magazine name,Library,Publisher,5,20,Date,null
+400000009,Magazine name,Library,Publisher,5,20,Date,null
+400000010,Magazine name,Library,Publisher,5,20,Date,null
+400000011,Magazine name,Library,Publisher,5,20,Date,null

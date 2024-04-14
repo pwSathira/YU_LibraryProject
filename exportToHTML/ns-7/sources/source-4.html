@@ -1,0 +1,146 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > CustomDocumentFilter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">yorku.eecs.logic</a>
+</div>
+
+<h1>Coverage Summary for Class: CustomDocumentFilter (yorku.eecs.logic)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CustomDocumentFilter</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    35.7%
+  </span>
+  <span class="absValue">
+    (5/14)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package yorku.eecs.logic;
+&nbsp;
+&nbsp;import javax.swing.text.AttributeSet;
+&nbsp;import javax.swing.text.BadLocationException;
+&nbsp;import javax.swing.text.DocumentFilter;
+&nbsp;
+<b class="fc">&nbsp;public class CustomDocumentFilter extends DocumentFilter {</b>
+&nbsp;    private static final int MAX_CHARACTERS = 9;
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
+<b class="fc">&nbsp;        if (string == null) {</b>
+&nbsp;            return;
+&nbsp;        }
+<b class="fc">&nbsp;        replace(fb, offset, 0, string, attr);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
+<b class="fc">&nbsp;        String newText = text.replaceAll(&quot;[^-\\d]&quot;, &quot;&quot;); // Remove non-digit, non-dash characters</b>
+<b class="fc">&nbsp;        StringBuilder fullText = new StringBuilder(fb.getDocument().getText(0, fb.getDocument().getLength()));</b>
+<b class="nc">&nbsp;        fullText.replace(offset, offset + length, newText); // Replace the text in the builder</b>
+&nbsp;
+&nbsp;        // Remove existing dashes for reformatting
+<b class="nc">&nbsp;        String digitsOnly = fullText.toString().replaceAll(&quot;-&quot;, &quot;&quot;);</b>
+<b class="nc">&nbsp;        if (digitsOnly.length() &gt; MAX_CHARACTERS) {</b>
+&nbsp;            return; // Exit if result exceeds max length
+&nbsp;        }
+&nbsp;
+&nbsp;        // Insert dashes appropriately
+<b class="nc">&nbsp;        StringBuilder formatted = new StringBuilder();</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; digitsOnly.length(); i++) {</b>
+<b class="nc">&nbsp;            if (i &gt; 0 &amp;&amp; i % 3 == 0) {</b>
+<b class="nc">&nbsp;                formatted.append(&quot;-&quot;);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            formatted.append(digitsOnly.charAt(i));</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // Replace the entire document&#39;s text with the newly formatted string
+<b class="nc">&nbsp;        super.replace(fb, 0, fb.getDocument().getLength(), formatted.toString(), attrs);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-06 19:56</div>
+</div>
+</body>
+</html>

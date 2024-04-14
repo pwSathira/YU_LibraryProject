@@ -1,0 +1,169 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > AdminController</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">yorku.eecs.controller.user</a>
+</div>
+
+<h1>Coverage Summary for Class: AdminController (yorku.eecs.controller.user)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AdminController</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    81.8%
+  </span>
+  <span class="absValue">
+    (9/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    84.6%
+  </span>
+  <span class="absValue">
+    (11/13)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package yorku.eecs.controller.user;
+&nbsp;
+&nbsp;import yorku.eecs.controller.ControllerError;
+&nbsp;import yorku.eecs.controller.item.ItemController;
+&nbsp;import yorku.eecs.model.item.Item;
+&nbsp;import yorku.eecs.model.user.User;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;public class AdminController{
+&nbsp;    //facade design pattern
+&nbsp;    private ItemController itemController;
+&nbsp;    private UserController userController;
+&nbsp;
+<b class="fc">&nbsp;    public AdminController() {</b>
+<b class="fc">&nbsp;        this.itemController = new ItemController();</b>
+<b class="fc">&nbsp;        this.userController = new UserController();</b>
+&nbsp;    }
+&nbsp;    /*
+&nbsp;     * CRUD Operations for Item Model
+&nbsp;     */
+&nbsp;    //create new item
+&nbsp;    public Item createItem(Item item) throws ControllerError {
+<b class="nc">&nbsp;        return itemController.createItem(item);</b>
+&nbsp;    }
+&nbsp;    //public Item readItem
+&nbsp;    public void readItem(String id, String type) throws ControllerError{
+<b class="fc">&nbsp;        itemController.readItem(id, type);</b>
+&nbsp;    }
+&nbsp;    public void updateItem(Item item) throws  ControllerError{
+<b class="fc">&nbsp;        itemController.updateItem(item);</b>
+&nbsp;    }
+&nbsp;    // Deletes item
+&nbsp;    public void deleteItem(Item item) throws ControllerError{
+<b class="fc">&nbsp;        itemController.deleteItem(item);</b>
+&nbsp;    }
+&nbsp;    /*
+&nbsp;     * CRUD Operations for User Model
+&nbsp;     */
+&nbsp;    // Create a new user
+&nbsp;    public User createUser(User user) throws ControllerError {
+<b class="nc">&nbsp;        return userController.createUser(user);</b>
+&nbsp;    }
+&nbsp;    // Read an existing user
+&nbsp;    public User readUser(String id, String type) throws ControllerError {
+<b class="fc">&nbsp;        return userController.readUser(id, type);</b>
+&nbsp;    }
+&nbsp;    // Update an existing user
+&nbsp;    public void updateUser(User user) throws ControllerError {
+<b class="fc">&nbsp;        userController.updateUser(user);</b>
+&nbsp;    }
+&nbsp;    // Delete an existing user
+&nbsp;    public void deleteUser(User user) throws ControllerError {
+<b class="fc">&nbsp;        userController.deleteUser(user);</b>
+&nbsp;    }
+&nbsp;    // Determine user type
+&nbsp;    public String determineUserType(String id) {
+<b class="fc">&nbsp;        return userController.determineUserType(id);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean authenticateUser(User userDB, User userInput) {
+<b class="fc">&nbsp;        return userController.authenticateUser(userDB, userInput);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-06 19:56</div>
+</div>
+</body>
+</html>

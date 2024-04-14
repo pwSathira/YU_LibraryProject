@@ -1,0 +1,149 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > ImageProcessor</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">yorku.eecs.logic</a>
+</div>
+
+<h1>Coverage Summary for Class: ImageProcessor (yorku.eecs.logic)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ImageProcessor</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/22)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package yorku.eecs.logic;
+&nbsp;
+&nbsp;import java.awt.*;
+&nbsp;import java.awt.image.BufferedImage;
+&nbsp;import java.awt.image.RescaleOp;
+&nbsp;import javax.swing.ImageIcon;
+&nbsp;
+<b class="nc">&nbsp;public class ImageProcessor {</b>
+&nbsp;    public static ImageIcon darkenImageIcon(ImageIcon originalIcon, float scaleFactor) {
+<b class="nc">&nbsp;        BufferedImage originalImage = new BufferedImage(</b>
+<b class="nc">&nbsp;                originalIcon.getIconWidth(),</b>
+<b class="nc">&nbsp;                originalIcon.getIconHeight(),</b>
+&nbsp;                BufferedImage.TYPE_INT_ARGB);
+<b class="nc">&nbsp;        Graphics2D g = originalImage.createGraphics();</b>
+<b class="nc">&nbsp;        originalIcon.paintIcon(null, g, 0, 0);</b>
+<b class="nc">&nbsp;        g.dispose();</b>
+<b class="nc">&nbsp;        float[] scales = { scaleFactor, scaleFactor, scaleFactor, 1.0f };</b>
+<b class="nc">&nbsp;        float[] offsets = new float[4];</b>
+<b class="nc">&nbsp;        RescaleOp rescaleOp = new RescaleOp(scales, offsets, null);</b>
+<b class="nc">&nbsp;        BufferedImage darkenedImage = rescaleOp.filter(originalImage, null);</b>
+<b class="nc">&nbsp;        return new ImageIcon(darkenedImage);</b>
+&nbsp;    }
+&nbsp;    private static BufferedImage toBufferedImage(Image img) {
+<b class="nc">&nbsp;        if (img instanceof BufferedImage) {</b>
+<b class="nc">&nbsp;            return (BufferedImage) img;</b>
+&nbsp;        }
+&nbsp;        // Create a buffered image with transparency
+<b class="nc">&nbsp;        BufferedImage bimage = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_ARGB);</b>
+&nbsp;
+&nbsp;        // Draw the image on to the buffered image
+<b class="nc">&nbsp;        Graphics2D bGr = bimage.createGraphics();</b>
+<b class="nc">&nbsp;        bGr.drawImage(img, 0, 0, null);</b>
+<b class="nc">&nbsp;        bGr.dispose();</b>
+&nbsp;
+&nbsp;        // Return the buffered image
+<b class="nc">&nbsp;        return bimage;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static ImageIcon resizeIcon(ImageIcon icon, int width, int height) {
+<b class="nc">&nbsp;            Image img = icon.getImage();</b>
+<b class="nc">&nbsp;            Image resizedImage = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);</b>
+<b class="nc">&nbsp;            return new ImageIcon(resizedImage);</b>
+&nbsp;    }
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-06 19:56</div>
+</div>
+</body>
+</html>

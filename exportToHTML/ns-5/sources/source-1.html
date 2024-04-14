@@ -1,0 +1,298 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > ItemController</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">yorku.eecs.controller.item</a>
+</div>
+
+<h1>Coverage Summary for Class: ItemController (yorku.eecs.controller.item)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ItemController</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    72.7%
+  </span>
+  <span class="absValue">
+    (8/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    37.8%
+  </span>
+  <span class="absValue">
+    (37/98)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package yorku.eecs.controller.item;
+&nbsp;
+&nbsp;import yorku.eecs.controller.ControllerError;
+&nbsp;import yorku.eecs.logic.CSVError;
+&nbsp;import yorku.eecs.logic.CsvUtil;
+&nbsp;import yorku.eecs.logic.FilePath;
+&nbsp;import yorku.eecs.model.item.Item;
+&nbsp;import yorku.eecs.model.item.ItemFactory;
+&nbsp;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.List;
+&nbsp;import java.io.FileReader;
+&nbsp;import java.io.BufferedReader;
+&nbsp;import java.io.IOException;
+&nbsp;
+&nbsp;/*
+&nbsp; * CRUD Operations for Item Model
+&nbsp; */
+<b class="fc">&nbsp;public class ItemController {</b>
+&nbsp;    String itemType;
+&nbsp;    private String path;
+&nbsp;
+&nbsp;    //Create an item, and assign id
+&nbsp;    public Item createItem(Item item) throws ControllerError {
+<b class="nc">&nbsp;        setPathBasedOnItemType(item);</b>
+&nbsp;        try {
+<b class="nc">&nbsp;            String currentId = CsvUtil.getLastInstanceByColumn(path, 0);</b>
+<b class="nc">&nbsp;            assert currentId != null;</b>
+<b class="nc">&nbsp;            int id = Integer.parseInt(currentId) + 1;</b>
+<b class="nc">&nbsp;            item.setItemID(id);</b>
+<b class="nc">&nbsp;            CsvUtil.writeCsv(item.toCSV(id), path, true);</b>
+<b class="nc">&nbsp;            return item;</b>
+<b class="nc">&nbsp;        } catch (Exception e) {</b>
+<b class="nc">&nbsp;            throw new ControllerError(&quot;Item creation failed&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;    //Update an item
+&nbsp;    public void updateItem(Item item) throws ControllerError{
+<b class="fc">&nbsp;        setPathBasedOnItemType(item);</b>
+&nbsp;        try {
+<b class="fc">&nbsp;            List&lt;String&gt; record = CsvUtil.getRecordByColumn(path, item.getStringId(), 0);</b>
+<b class="fc">&nbsp;            assert record != null;</b>
+<b class="nc">&nbsp;            ItemFactory.updateItem(item, record);</b>
+<b class="nc">&nbsp;            CsvUtil.writeCsv(item.toCSV(item.getItemID()), path, false);</b>
+<b class="nc">&nbsp;        } catch (Exception e) {</b>
+<b class="nc">&nbsp;            throw new ControllerError(&quot;Item update failed&quot;);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;    //Read an item
+&nbsp;    public Item readItem(String id, String itemType) throws ControllerError{
+<b class="fc">&nbsp;        setPathBasedOnItemType(itemType);</b>
+&nbsp;        try {
+<b class="nc">&nbsp;          List&lt;String&gt; record = CsvUtil.getRecordByColumn(path, id, 0);</b>
+<b class="nc">&nbsp;          if (record != null) {return ItemFactory.createItem(itemType, record);}</b>
+<b class="nc">&nbsp;        } catch (Exception e) {</b>
+<b class="nc">&nbsp;            throw new ControllerError(&quot;Error reading item&quot;, e);</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;    //Delete an item
+&nbsp;    public void deleteItem(Item item) throws ControllerError {
+<b class="fc">&nbsp;        setPathBasedOnItemType(item);</b>
+&nbsp;        try {
+<b class="fc">&nbsp;            List&lt;List&lt;String&gt;&gt; records = CsvUtil.readCsv(path);</b>
+<b class="fc">&nbsp;            records.removeIf(record -&gt; record.get(0).equals(item.getStringId()));</b>
+<b class="fc">&nbsp;            CsvUtil.writeCsv(records, path, false);</b>
+<b class="nc">&nbsp;        } catch (CSVError e) {</b>
+<b class="nc">&nbsp;            throw new ControllerError(&quot;Item deletion failed&quot;, e);</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;    //Set the path based on the user type
+&nbsp;    public void setPathBasedOnItemType(Object itemTypeOrClass) throws ControllerError {
+&nbsp;        String itemType;
+<b class="fc">&nbsp;        if (itemTypeOrClass instanceof String) {</b>
+<b class="fc">&nbsp;            itemType = (String) itemTypeOrClass;</b>
+<b class="fc">&nbsp;        } else if (itemTypeOrClass instanceof Item) {</b>
+<b class="fc">&nbsp;            itemType = itemTypeOrClass.getClass().getSimpleName();</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            throw new ControllerError(&quot;Invalid item type or class&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        switch (itemType) {</b>
+&nbsp;            case &quot;CD_DVD&quot;:
+<b class="nc">&nbsp;                this.path = FilePath.CD_DVDDATA.getPath();</b>
+<b class="nc">&nbsp;                this.itemType = &quot;CD_DVD&quot;;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case &quot;Book&quot;:
+<b class="nc">&nbsp;                this.path = FilePath.BOOKDATA.getPath();</b>
+<b class="nc">&nbsp;                this.itemType = &quot;Book&quot;;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case &quot;Magazine&quot;:
+<b class="nc">&nbsp;                this.path = FilePath.MAGAZINEDATA.getPath();</b>
+<b class="nc">&nbsp;                this.itemType = &quot;Magazine&quot;;</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case &quot;Textbook&quot;:
+<b class="fc">&nbsp;                this.path = FilePath.TEXTBOOKDATA.getPath();</b>
+<b class="fc">&nbsp;                this.itemType = &quot;Textbook&quot;;</b>
+<b class="fc">&nbsp;                break;</b>
+&nbsp;            default:
+<b class="fc">&nbsp;                throw new ControllerError(&quot;Item type not found: &quot; + itemType);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;    public void printRecords(List&lt;String&gt; records) {
+<b class="nc">&nbsp;        for (String record : records) {</b>
+<b class="nc">&nbsp;            System.out.println(record);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String determineItemType(String id) {
+<b class="fc">&nbsp;        if(id.startsWith(&quot;1&quot;)){</b>
+<b class="nc">&nbsp;            return &quot;Book&quot;;</b>
+<b class="fc">&nbsp;        }else if(id.startsWith(&quot;2&quot;)){</b>
+<b class="nc">&nbsp;            return &quot;CD_DVD&quot;;</b>
+<b class="fc">&nbsp;        }else if(id.startsWith(&quot;3&quot;)){</b>
+<b class="nc">&nbsp;            return &quot;Magazine&quot;;</b>
+<b class="fc">&nbsp;        }else if(id.startsWith(&quot;4&quot;)){</b>
+<b class="nc">&nbsp;            return &quot;Textbook&quot;;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ArrayList&lt;String&gt; recommendItem(String input){
+<b class="nc">&nbsp;        ArrayList&lt;String&gt; recommendations = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;        ArrayList&lt;String&gt; paths = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;        paths.add(FilePath.BOOKDATA.getPath());</b>
+<b class="nc">&nbsp;        paths.add(FilePath.CD_DVDDATA.getPath());</b>
+<b class="nc">&nbsp;        paths.add(FilePath.MAGAZINEDATA.getPath());</b>
+<b class="nc">&nbsp;        paths.add(FilePath.TEXTBOOKDATA.getPath());</b>
+<b class="nc">&nbsp;        for(String path : paths){</b>
+&nbsp;            try{
+<b class="nc">&nbsp;                BufferedReader reader = new BufferedReader(new FileReader(path));</b>
+&nbsp;                String line;
+<b class="nc">&nbsp;                List&lt;String&gt; inputTokens = tokenize(input.toLowerCase());</b>
+<b class="nc">&nbsp;                while((line = reader.readLine()) != null){</b>
+<b class="nc">&nbsp;                    String[] parts = line.split(&quot;,&quot;);</b>
+<b class="nc">&nbsp;                    String bookName = parts[1].toLowerCase();</b>
+<b class="nc">&nbsp;                    List&lt;String&gt; bookTokens = tokenize(bookName);</b>
+<b class="nc">&nbsp;                    double similarity = cosineSimilarity(inputTokens , bookTokens);</b>
+<b class="nc">&nbsp;                    if (similarity &gt; 0.5){</b>
+<b class="nc">&nbsp;                        recommendations.add(bookName);</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                }</b>
+<b class="nc">&nbsp;                reader.close();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            catch(Exception e){</b>
+<b class="nc">&nbsp;                e.printStackTrace();</b>
+<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;
+<b class="nc">&nbsp;        return recommendations;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static List&lt;String&gt; tokenize(String text){
+<b class="fc">&nbsp;        List&lt;String&gt; tokens = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;        for(String token : text.split(&quot;\\s&quot;)){</b>
+<b class="fc">&nbsp;            tokens.add(token);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return tokens;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static double cosineSimilarity(List&lt;String&gt; list1, List&lt;String&gt; list2){
+<b class="fc">&nbsp;        int product = 0;</b>
+<b class="fc">&nbsp;        for(String token : list1){</b>
+<b class="fc">&nbsp;            if(list2.contains(token)){</b>
+<b class="fc">&nbsp;                product++;</b>
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        double magnitude1 = Math.sqrt(list1.size());</b>
+<b class="fc">&nbsp;        double magnitude2 = Math.sqrt(list2.size());</b>
+<b class="fc">&nbsp;        return product / (magnitude1 * magnitude2);</b>
+&nbsp;    }
+&nbsp;}
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-06 19:56</div>
+</div>
+</body>
+</html>

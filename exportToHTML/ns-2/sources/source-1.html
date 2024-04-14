@@ -1,0 +1,178 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > Main</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">yorku.eecs</a>
+</div>
+
+<h1>Coverage Summary for Class: Main (yorku.eecs)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Main</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/31)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package yorku.eecs;
+&nbsp;
+&nbsp;import yorku.eecs.controller.ControllerError;
+&nbsp;import yorku.eecs.controller.item.ItemController;
+&nbsp;import yorku.eecs.controller.item.RentListController;
+&nbsp;import yorku.eecs.controller.user.UserController;
+&nbsp;import yorku.eecs.model.item.Book;
+&nbsp;import yorku.eecs.model.item.Item;
+&nbsp;import yorku.eecs.model.item.Magazine;
+&nbsp;import yorku.eecs.model.user.Student;
+&nbsp;import yorku.eecs.model.user.Visitor;
+&nbsp;import yorku.eecs.view.MainUI;
+&nbsp;import yorku.eecs.model.item.CD_DVD;
+&nbsp;
+&nbsp;import java.sql.Array;
+&nbsp;import java.util.ArrayList;
+&nbsp;
+&nbsp;
+<b class="nc">&nbsp;public class Main {</b>
+&nbsp;    public static void main(String[] args) throws ControllerError {
+&nbsp;
+&nbsp;
+<b class="nc">&nbsp;        System.out.println(&quot;YorkU booting...&quot;);</b>
+<b class="nc">&nbsp;        MainUI main = MainUI.getSingleton();</b>
+<b class="nc">&nbsp;        CD_DVD cdDvd = new CD_DVD.Builder()</b>
+<b class="nc">&nbsp;                .UPC(&quot;Test&quot;)</b>
+<b class="nc">&nbsp;                .itemName(&quot;Test&quot;)</b>
+<b class="nc">&nbsp;                .price(1)</b>
+<b class="nc">&nbsp;                .location(&quot;Test&quot;)</b>
+<b class="nc">&nbsp;                .publisher(&quot;Test&quot;)</b>
+<b class="nc">&nbsp;                .quantity(20)</b>
+<b class="nc">&nbsp;                .itemID(10004)</b>
+<b class="nc">&nbsp;                .build();</b>
+&nbsp;
+<b class="nc">&nbsp;        Book book = new Book.Builder()</b>
+<b class="nc">&nbsp;                .ISBN(&quot;ISBN&quot;)</b>
+<b class="nc">&nbsp;                .itemName(&quot;NAME&quot;)</b>
+<b class="nc">&nbsp;                .price(1)</b>
+<b class="nc">&nbsp;                .location(&quot;LOCATION&quot;)</b>
+<b class="nc">&nbsp;                .publisher(&quot;PUBLISHER&quot;)</b>
+<b class="nc">&nbsp;                .quantity(20)</b>
+<b class="nc">&nbsp;                .expiryDate(&quot;DATE&quot;)</b>
+<b class="nc">&nbsp;                .itemID(100000000)</b>
+<b class="nc">&nbsp;                .build();</b>
+&nbsp;
+<b class="nc">&nbsp;        Magazine magazine = new Magazine.Builder()</b>
+<b class="nc">&nbsp;                .ISSN(&quot;!@#&quot;)</b>
+<b class="nc">&nbsp;                .itemName(&quot;ello&quot;)</b>
+<b class="nc">&nbsp;                .price(1)</b>
+<b class="nc">&nbsp;                .location(&quot;Test&quot;)</b>
+<b class="nc">&nbsp;                .publisher(&quot;Test&quot;)</b>
+<b class="nc">&nbsp;                .quantity(20)</b>
+<b class="nc">&nbsp;                .itemID(300000000)</b>
+<b class="nc">&nbsp;                .build();</b>
+&nbsp;//        Visitor visitor = new Visitor(&quot;400000001&quot;, &quot;password&quot;);
+&nbsp;////        UserController userController = new UserController();
+&nbsp;////        userController.createUser(visitor);
+&nbsp;//        RentListController rentListController = new RentListController();
+&nbsp;//        rentListController.createEntry(visitor, book);
+&nbsp;//        rentListController.createEntry(visitor, magazine);
+&nbsp;//        rentListController.checkEntry(visitor);
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;    //vin was here
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-06 19:56</div>
+</div>
+</body>
+</html>

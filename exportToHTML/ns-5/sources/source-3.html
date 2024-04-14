@@ -1,0 +1,417 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > RentListController</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">yorku.eecs.controller.item</a>
+</div>
+
+<h1>Coverage Summary for Class: RentListController (yorku.eecs.controller.item)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">RentListController</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    62.5%
+  </span>
+  <span class="absValue">
+    (35/56)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package yorku.eecs.controller.item;
+&nbsp;
+&nbsp;import yorku.eecs.controller.ControllerError;
+&nbsp;import yorku.eecs.logic.CSVError;
+&nbsp;import yorku.eecs.logic.CsvUtil;
+&nbsp;import yorku.eecs.model.item.Item;
+&nbsp;import yorku.eecs.model.user.User;
+&nbsp;
+&nbsp;import java.io.*;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.List;
+&nbsp;import java.util.stream.Collectors;
+&nbsp;import java.time.LocalDate;
+&nbsp;import java.time.format.DateTimeFormatter;
+&nbsp;
+<b class="fc">&nbsp;public class RentListController {</b>
+<b class="fc">&nbsp;    private String path = &quot;src/main/resources/data/rentlist.csv&quot;;</b>
+&nbsp;    /*
+&nbsp;    Current plan for CSV:
+&nbsp;    Column 1: Item ID
+&nbsp;    Column 2: List of user IDs that have rented item
+&nbsp;    Column 3: List of expiration dates, mapped to the users by index
+&nbsp;     */
+&nbsp;
+&nbsp;
+&nbsp;//    public void checkItemExists(Item item) {
+&nbsp;//        String itemID = item.getStringID();
+&nbsp;//        try {
+&nbsp;//            List&lt;String&gt; records = CsvUtil.getRecordByColumn(path, itemID, 0);
+&nbsp;//            if (records == null || records.size() == 0) {
+&nbsp;//                // Append new item ID at the end of the CSV
+&nbsp;//                FileWriter csvWriter = new FileWriter(path);
+&nbsp;//                csvWriter.append(itemID);
+&nbsp;//                csvWriter.close();
+&nbsp;//            }
+&nbsp;//        } catch(IOException e) {
+&nbsp;//            System.out.println(&quot;Error checking item exists in rentlist&quot;);
+&nbsp;//        }
+&nbsp;//    }
+&nbsp;//
+&nbsp;//    public boolean checkAvailability(Item item) {
+&nbsp;//        // Loop through users and count how many copies are checked out
+&nbsp;//        String itemID = item.getStringID();
+&nbsp;//        boolean available = false;
+&nbsp;//        try {
+&nbsp;//            List&lt;String&gt; records = CsvUtil.getRecordByColumn(path, itemID, 0);
+&nbsp;//            if (records.size() &gt; 21) { // Not sure if the first column (item ID) is included in list
+&nbsp;//                available = false;
+&nbsp;//            }
+&nbsp;//            else {
+&nbsp;//                available = true;
+&nbsp;//            }
+&nbsp;//        } catch(CSVError e) {
+&nbsp;//            System.out.println(&quot;Error checking availability of item&quot;);
+&nbsp;//        }
+&nbsp;//        return available;
+&nbsp;//    }
+&nbsp;//
+&nbsp;//    public void rentItem(User user, Item item) {
+&nbsp;//        String itemID = item.getStringID();
+&nbsp;//        String userID = user.getStringId();
+&nbsp;//        LocalDate currentDate = LocalDate.now();
+&nbsp;//        LocalDate nextMonthDate = currentDate.plusMonths(1);
+&nbsp;//        // Format date in terms of &quot;month-day-year&quot;
+&nbsp;//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(&quot;MM-dd-yyyy&quot;);
+&nbsp;//        String nextMonthString = nextMonthDate.format(formatter);
+&nbsp;//        checkItemExists(item);
+&nbsp;//        boolean canRent = checkAvailability(item);
+&nbsp;//        if (canRent == true) {
+&nbsp;//            try{
+&nbsp;//                List&lt;String&gt; newRecord = CsvUtil.getRecordByColumn(path, itemID, 0);
+&nbsp;//                String newEntry = userID + &quot;~&quot; + nextMonthString;
+&nbsp;//                newRecord.add(newEntry);
+&nbsp;//                CsvUtil.removeRecordByColumn(path, itemID, 0);
+&nbsp;//                CsvUtil.writeCsv(Arrays.asList(newRecord), path, true);
+&nbsp;//            } catch(CSVError e) {
+&nbsp;//                System.out.println(&quot;Error renting item: &quot; + itemID + &quot; for user: &quot; + userID);
+&nbsp;//            }
+&nbsp;//        }
+&nbsp;//    }
+&nbsp;//
+&nbsp;//    public void returnItem(User user, Item item) {
+&nbsp;//        String itemID = item.getStringID();
+&nbsp;//        String userID = user.getStringId();
+&nbsp;//        LocalDate currentDate = LocalDate.now();
+&nbsp;//        LocalDate nextMonthDate = currentDate.plusMonths(1);
+&nbsp;//        // Format date in terms of &quot;month-day-year&quot;
+&nbsp;//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(&quot;MM-dd-yyyy&quot;);
+&nbsp;//        String nextMonthString = nextMonthDate.format(formatter);
+&nbsp;//        checkItemExists(item);
+&nbsp;//        try {
+&nbsp;//            List&lt;String&gt; record = CsvUtil.getRecordByColumn(path, itemID, 0);
+&nbsp;//            boolean userHasItem = false;
+&nbsp;//            int indexToBeDeleted = -1;
+&nbsp;//            for (int i = 0; i &lt; record.size(); i++) {
+&nbsp;//                String current[] = record.get(i).split(&quot;~&quot;);
+&nbsp;//                if (current[0].equals(userID)) {
+&nbsp;//                    userHasItem = true;
+&nbsp;//                    indexToBeDeleted = i;
+&nbsp;//                    break;
+&nbsp;//                }
+&nbsp;//            }
+&nbsp;//            if (userHasItem == true) {
+&nbsp;//                record.remove(indexToBeDeleted);
+&nbsp;//                CsvUtil.removeRecordByColumn(path, itemID, 0);
+&nbsp;//                CsvUtil.writeCsv(Arrays.asList(record), path, true);
+&nbsp;//            }
+&nbsp;//            else {
+&nbsp;//                System.out.println(&quot;User: &quot; + userID + &quot; does not have item: &quot; + itemID + &quot; checked out&quot;);
+&nbsp;//            }
+&nbsp;//        } catch(CSVError e) {
+&nbsp;//            System.out.println(&quot;Error returning item: &quot; + itemID + &quot; for user: &quot; + userID);
+&nbsp;//        }
+&nbsp;//    }
+&nbsp;//
+&nbsp;//    public List&lt;String&gt; getRentList(User user) {
+&nbsp;//        /*
+&nbsp;//        Returns a String list where each element will be &quot;itemID~DueDate&quot;
+&nbsp;//         */
+&nbsp;//        String userID = user.getStringId();
+&nbsp;//        List&lt;String&gt; rentList = new ArrayList&lt;&gt;();
+&nbsp;//        try {
+&nbsp;//            BufferedReader br = new BufferedReader(new FileReader(path));
+&nbsp;//            String currentLine;
+&nbsp;//            while ((currentLine = br.readLine()) != null) {
+&nbsp;//                // Separate the data by the comma
+&nbsp;//                String[] entries = currentLine.split(&quot;,&quot;);
+&nbsp;//                // Start at 1 because the first element is the item ID
+&nbsp;//                for (int i = 1; i &lt; entries.length; i++) {
+&nbsp;//                    String[] current = entries[i].split(&quot;~&quot;);
+&nbsp;//                    if (current[0].equals(userID)) {
+&nbsp;//                        // entries[0] is the item ID, current[1] is the due date
+&nbsp;//                        String addItem = entries[0] + &quot;~&quot; + current[1];
+&nbsp;//                        rentList.add(addItem);
+&nbsp;//                    }
+&nbsp;//                }
+&nbsp;//            }
+&nbsp;//        } catch(FileNotFoundException e) {
+&nbsp;//            System.out.println(&quot;Error getting rent list for user: &quot; + userID);
+&nbsp;//        } catch (IOException e) {
+&nbsp;//            throw new RuntimeException(e);
+&nbsp;//        }
+&nbsp;//        return rentList;
+&nbsp;//    }
+&nbsp;//
+&nbsp;//    public List&lt;String&gt; getUsersDueDates(User user) {
+&nbsp;//        /*
+&nbsp;//        Returns the due dates for all the items a user has rented, without the item IDs
+&nbsp;//         */
+&nbsp;//        String userID = user.getStringId();
+&nbsp;//        List&lt;String&gt; dueDates = new ArrayList&lt;&gt;();
+&nbsp;//        try {
+&nbsp;//            BufferedReader br = new BufferedReader(new FileReader(path));
+&nbsp;//            String currentLine;
+&nbsp;//            while ((currentLine = br.readLine()) != null) {
+&nbsp;//                // Separate the data by the comma
+&nbsp;//                String[] entries = currentLine.split(&quot;,&quot;);
+&nbsp;//                // Start at 1 because the first element is the item ID
+&nbsp;//                for (int i = 1; i &lt; entries.length; i++) {
+&nbsp;//                    String[] current = entries[i].split(&quot;~&quot;);
+&nbsp;//                    if (current[0].equals(userID)) {
+&nbsp;//                        // entries[0] is the item ID, current[1] is the due date
+&nbsp;//                        dueDates.add(current[1]);
+&nbsp;//                    }
+&nbsp;//                }
+&nbsp;//            }
+&nbsp;//        } catch(FileNotFoundException e) {
+&nbsp;//            System.out.println(&quot;Error getting due dates for user: &quot; + userID);
+&nbsp;//        } catch (IOException e) {
+&nbsp;//            throw new RuntimeException(e);
+&nbsp;//        }
+&nbsp;//        return dueDates;
+&nbsp;//    }
+&nbsp;//
+&nbsp;//    public List&lt;String&gt; getUsersItems(User user) {
+&nbsp;//        /*
+&nbsp;//        Returns a list containing all the items a user has rented, without the due dates
+&nbsp;//         */
+&nbsp;//        String userID = user.getStringId();
+&nbsp;//        List&lt;String&gt; itemsList = new ArrayList&lt;&gt;();
+&nbsp;//        try {
+&nbsp;//            BufferedReader br = new BufferedReader(new FileReader(path));
+&nbsp;//            String currentLine;
+&nbsp;//            while ((currentLine = br.readLine()) != null) {
+&nbsp;//                // Separate the data by the comma
+&nbsp;//                String[] entries = currentLine.split(&quot;,&quot;);
+&nbsp;//                // Start at 1 because the first element is the item ID
+&nbsp;//                for (int i = 1; i &lt; entries.length; i++) {
+&nbsp;//                    String[] current = entries[i].split(&quot;~&quot;);
+&nbsp;//                    if (current[0].equals(userID)) {
+&nbsp;//                        itemsList.add(entries[0]);
+&nbsp;//                    }
+&nbsp;//                }
+&nbsp;//            }
+&nbsp;//        } catch(FileNotFoundException e) {
+&nbsp;//            System.out.println(&quot;Error getting items for user: &quot; + userID);
+&nbsp;//        } catch (IOException e) {
+&nbsp;//            throw new RuntimeException(e);
+&nbsp;//        }
+&nbsp;//        return itemsList;
+&nbsp;//    }
+&nbsp;//
+&nbsp;//    public List&lt;String&gt; getUsersRentingItem(Item item) {
+&nbsp;//        /*
+&nbsp;//        Returns a list containing all the users renting a specified item
+&nbsp;//         */
+&nbsp;//        String itemID = item.getStringId();
+&nbsp;//        List&lt;String&gt; userList = new ArrayList&lt;&gt;();
+&nbsp;//        try {
+&nbsp;//            List &lt;String&gt; users = CsvUtil.getRecordByColumn(path, itemID, 0);
+&nbsp;//            users.remove(0); // Remove the first element since that is the item ID
+&nbsp;//            userList = users;
+&nbsp;//        } catch(CSVError e) {
+&nbsp;//            System.out.println(&quot;Error getting the users renting item: &quot; + itemID);
+&nbsp;//        }
+&nbsp;//        return userList;
+&nbsp;//    }
+&nbsp;
+&nbsp;    /*
+&nbsp;    Format:
+&nbsp;    First column: User ID
+&nbsp;    Second column: List of items the user has checked out
+&nbsp;    Uses rentlist.csv for data
+&nbsp;     */
+&nbsp;    //Creating Entry
+&nbsp;    public void createEntry(User user, Item item) throws ControllerError {
+&nbsp;        //Check if user exists
+<b class="fc">&nbsp;        user.getRentList().add(item);</b>
+&nbsp;        try{
+<b class="fc">&nbsp;            String id = user.getStringId();</b>
+<b class="fc">&nbsp;            List&lt;String&gt; records = CsvUtil.getRecordByColumn(path, id, 0);</b>
+<b class="fc">&nbsp;            if (records != null) {</b>
+&nbsp;                //Update entry
+<b class="fc">&nbsp;                List&lt;String&gt; modifiableRecords = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;                modifiableRecords.add(0, user.getStringId());</b>
+<b class="fc">&nbsp;                modifiableRecords.add(1, serializeItemList(user.getRentList()));</b>
+<b class="fc">&nbsp;                CsvUtil.writeCsv(Arrays.asList(modifiableRecords), path, false);</b>
+<b class="fc">&nbsp;            } else {</b>
+&nbsp;                //Create new entry
+<b class="nc">&nbsp;                List&lt;List&lt;String&gt;&gt; newRecord = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;                newRecord.add(Arrays.asList(id, serializeItemList(user.getRentList())));</b>
+<b class="nc">&nbsp;                CsvUtil.writeCsv(newRecord, path, true);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }catch (Exception e){</b>
+<b class="nc">&nbsp;            throw new ControllerError(&quot;Error reading user&quot;, e);</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private String serializeItemList(ArrayList&lt;Item&gt; rentList) {
+<b class="fc">&nbsp;        return rentList.stream()</b>
+<b class="fc">&nbsp;                .map(item -&gt; item.getStringID())</b>
+<b class="fc">&nbsp;                .collect(Collectors.joining(&quot;,&quot;));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //Reading Entry
+&nbsp;    public void returnEntry(User user, Item returnItem) throws ControllerError {
+&nbsp;        /* User Object rentList before -&gt; {returnItem, other Items}
+&nbsp;        * RentList CSV -&gt; { returnItem, other Items}
+&nbsp;        * return User
+&nbsp;         */
+<b class="fc">&nbsp;        List&lt;Item&gt; rentList = user.getRentList();</b>
+<b class="fc">&nbsp;        rentList.remove(returnItem);</b>
+&nbsp;        try{
+<b class="fc">&nbsp;            String id = user.getStringId();</b>
+<b class="fc">&nbsp;            List&lt;String&gt; records = CsvUtil.getRecordByColumn(path, id, 0);</b>
+<b class="fc">&nbsp;            if (records != null) {</b>
+&nbsp;                //Update entry
+<b class="nc">&nbsp;                List&lt;String&gt; modifiableRecords = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;                modifiableRecords.add(0, user.getStringId());</b>
+<b class="nc">&nbsp;                modifiableRecords.add(1, serializeItemList(user.getRentList()));</b>
+<b class="nc">&nbsp;                CsvUtil.writeCsv(Arrays.asList(modifiableRecords), path, false);</b>
+<b class="nc">&nbsp;            } else {</b>
+&nbsp;                //Throw error that user does not exist
+<b class="fc">&nbsp;                throw new ControllerError(&quot;User does not exist&quot;);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }catch (Exception e){</b>
+<b class="nc">&nbsp;            throw new ControllerError(&quot;Error reading user&quot;, e);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //Return Item
+&nbsp;    public void checkEntry(User user) throws ControllerError {
+&nbsp;        try {
+<b class="fc">&nbsp;            String id = user.getStringId();</b>
+<b class="fc">&nbsp;            List&lt;String&gt; records = CsvUtil.getRecordByColumn(path, id, 0);</b>
+<b class="fc">&nbsp;            System.out.println(&quot;Records: &quot; + records);</b>
+<b class="fc">&nbsp;            if (records != null &amp;&amp; !records.isEmpty()) {</b>
+&nbsp;                // Skip the first element and parse the remaining strings into a list of integers
+<b class="fc">&nbsp;                ArrayList&lt;Integer&gt; itemIds = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;                for (int i = 1; i &lt; records.size(); i++) { // Start from 1 to skip the ID</b>
+&nbsp;                    try {
+<b class="fc">&nbsp;                        itemIds.add(Integer.parseInt(records.get(i)));</b>
+<b class="nc">&nbsp;                    } catch (NumberFormatException e) {</b>
+<b class="nc">&nbsp;                        System.err.println(&quot;Error parsing record to integer: &quot; + records.get(i));</b>
+<b class="fc">&nbsp;                    }</b>
+&nbsp;                }
+<b class="fc">&nbsp;                user.getRentList().clear();</b>
+<b class="fc">&nbsp;                for (int itemId : itemIds) {</b>
+<b class="fc">&nbsp;                    ItemController itemController = new ItemController();</b>
+<b class="fc">&nbsp;                    String itemType = itemController.determineItemType(Integer.toString(itemId));</b>
+<b class="fc">&nbsp;                    Item item = itemController.readItem(Integer.toString(itemId), itemType);</b>
+<b class="nc">&nbsp;                    user.getRentList().add(item);</b>
+<b class="nc">&nbsp;                }</b>
+<b class="nc">&nbsp;            } else {</b>
+&nbsp;                // Throw error that user does not exist
+<b class="fc">&nbsp;                throw new ControllerError(&quot;User does not exist&quot;);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } catch (Exception e) {</b>
+<b class="nc">&nbsp;            throw new ControllerError(&quot;Error reading user&quot;, e);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-06 19:56</div>
+</div>
+</body>
+</html>

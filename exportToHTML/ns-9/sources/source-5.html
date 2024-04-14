@@ -1,0 +1,173 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > Magazine</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">yorku.eecs.model.item</a>
+</div>
+
+<h1>Coverage Summary for Class: Magazine (yorku.eecs.model.item)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Magazine</td>
+<td class="coverageStat">
+  <span class="percent">
+    25%
+  </span>
+  <span class="absValue">
+    (1/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    40%
+  </span>
+  <span class="absValue">
+    (2/5)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Magazine$Builder</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (6/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    72.7%
+  </span>
+  <span class="absValue">
+    (8/11)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package yorku.eecs.model.item;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;public class Magazine extends Item {
+&nbsp;
+&nbsp;    private String ISSN;
+&nbsp;
+&nbsp;    public Magazine(Builder builder){
+<b class="fc">&nbsp;        super(builder);</b>
+<b class="fc">&nbsp;        this.ISSN = builder.ISSN;</b>
+&nbsp;    }
+&nbsp;    //getter
+<b class="nc">&nbsp;    public String getISSN() { return this.ISSN; }</b>
+&nbsp;
+&nbsp;    //setter
+<b class="nc">&nbsp;    public void setISSN(String ISSN) { this.ISSN = ISSN; }</b>
+&nbsp;
+&nbsp;    //To CSV Method
+&nbsp;    @Override
+&nbsp;    protected void getExtraCSV(List&lt;String&gt; rowData) {
+<b class="nc">&nbsp;        rowData.add(ISSN);</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public static class Builder extends Item.Builder&lt;Builder&gt; {</b>
+&nbsp;        private String ISSN;
+&nbsp;
+&nbsp;        public Builder() {
+<b class="fc">&nbsp;            super();</b>
+&nbsp;        }
+&nbsp;        public Builder ISSN(String ISSN) {
+<b class="fc">&nbsp;            this.ISSN = ISSN;</b>
+<b class="fc">&nbsp;            return self();</b>
+&nbsp;        }
+&nbsp;        public Magazine build() {
+<b class="fc">&nbsp;            return new Magazine(this);</b>
+&nbsp;        }
+&nbsp;        @Override
+&nbsp;        protected Builder self() {
+<b class="fc">&nbsp;            return this;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-06 19:56</div>
+</div>
+</body>
+</html>

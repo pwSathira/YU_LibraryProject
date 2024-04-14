@@ -1,0 +1,153 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > ErrorTest0</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">&lt;empty package name&gt;</a>
+</div>
+
+<h1>Coverage Summary for Class: ErrorTest0 (&lt;empty package name&gt;)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ErrorTest0</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    88.5%
+  </span>
+  <span class="absValue">
+    (23/26)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;import org.junit.FixMethodOrder;
+&nbsp;import org.junit.Test;
+&nbsp;import org.junit.runners.MethodSorters;
+&nbsp;
+&nbsp;@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+<b class="fc">&nbsp;public class ErrorTest0 {</b>
+&nbsp;
+<b class="fc">&nbsp;    public static boolean debug = false;</b>
+&nbsp;
+&nbsp;    @Test
+&nbsp;    public void test1() throws Throwable {
+<b class="fc">&nbsp;        if (debug)</b>
+<b class="nc">&nbsp;            System.out.format(&quot;%n%s%n&quot;, &quot;ErrorTest0.test1&quot;);</b>
+<b class="fc">&nbsp;        yorku.eecs.controller.user.UserController userController0 = new yorku.eecs.controller.user.UserController();</b>
+&nbsp;        // during test generation this statement threw an exception of type java.lang.NullPointerException in error
+<b class="fc">&nbsp;        java.util.ArrayList&lt;yorku.eecs.model.user.User&gt; userList1 = userController0.getAdminQueue();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Test
+&nbsp;    public void test2() throws Throwable {
+<b class="fc">&nbsp;        if (debug)</b>
+<b class="nc">&nbsp;            System.out.format(&quot;%n%s%n&quot;, &quot;ErrorTest0.test2&quot;);</b>
+<b class="fc">&nbsp;        yorku.eecs.controller.user.AdminController adminController0 = new yorku.eecs.controller.user.AdminController();</b>
+<b class="fc">&nbsp;        java.lang.String str2 = adminController0.determineUserType(&quot;&quot;);</b>
+<b class="fc">&nbsp;        yorku.eecs.model.user.NonFaculty nonFaculty3 = new yorku.eecs.model.user.NonFaculty();</b>
+<b class="fc">&nbsp;        adminController0.deleteUser((yorku.eecs.model.user.User) nonFaculty3);</b>
+<b class="fc">&nbsp;        yorku.eecs.model.user.Faculty faculty5 = new yorku.eecs.model.user.Faculty();</b>
+<b class="fc">&nbsp;        java.util.List&lt;java.util.List&lt;java.lang.String&gt;&gt; strListList7 = faculty5.toCSV(0);</b>
+<b class="fc">&nbsp;        yorku.eecs.model.user.Admin admin14 = new yorku.eecs.model.user.Admin((int) (byte) 100, &quot;hi!&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;hi!&quot;);</b>
+<b class="fc">&nbsp;        yorku.eecs.controller.user.LibraryController libraryController15 = new yorku.eecs.controller.user.LibraryController((yorku.eecs.model.user.User) admin14);</b>
+<b class="fc">&nbsp;        java.lang.String str16 = admin14.getUserName();</b>
+<b class="fc">&nbsp;        java.lang.String[] strArray19 = new java.lang.String[] { &quot;default&quot;, &quot;default&quot; };</b>
+<b class="fc">&nbsp;        java.util.ArrayList&lt;java.lang.String&gt; strList20 = new java.util.ArrayList&lt;java.lang.String&gt;();</b>
+<b class="fc">&nbsp;        boolean boolean21 = java.util.Collections.addAll((java.util.Collection&lt;java.lang.String&gt;) strList20, strArray19);</b>
+<b class="fc">&nbsp;        admin14.setSubscribedList(strList20);</b>
+&nbsp;        // during test generation this statement threw an exception of type java.lang.NullPointerException in error
+<b class="fc">&nbsp;        boolean boolean23 = adminController0.authenticateUser((yorku.eecs.model.user.User) faculty5, (yorku.eecs.model.user.User) admin14);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Test
+&nbsp;    public void test3() throws Throwable {
+<b class="fc">&nbsp;        if (debug)</b>
+<b class="nc">&nbsp;            System.out.format(&quot;%n%s%n&quot;, &quot;ErrorTest0.test3&quot;);</b>
+<b class="fc">&nbsp;        yorku.eecs.model.user.Student student0 = new yorku.eecs.model.user.Student();</b>
+&nbsp;        // during test generation this statement threw an exception of type java.lang.NullPointerException in error
+<b class="fc">&nbsp;        java.util.ArrayList&lt;yorku.eecs.model.item.Book&gt; bookList1 = student0.getCourseBook();</b>
+&nbsp;    }
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-06 19:56</div>
+</div>
+</body>
+</html>

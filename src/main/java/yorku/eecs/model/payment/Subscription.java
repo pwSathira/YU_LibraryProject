@@ -9,9 +9,21 @@ public class Subscription {
     private String url;
     private PaymentMethod paymentMethod;
 
-    public Integer getDuration() {
+
+    public Subscription(){}
+    public Subscription(double price, int durationDays, String url){
+        this.price = price;
+        this.durationDays = durationDays;
+        this.url = url;
+    }
+    public int getDuration() {
         return durationDays;
     }
+
+    public void setDuration(int durationDays) {
+        this.durationDays = durationDays;
+    }
+
 
     public double getPrice () {
         return price;

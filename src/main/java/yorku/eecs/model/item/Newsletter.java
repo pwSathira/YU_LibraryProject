@@ -19,8 +19,24 @@ public class Newsletter {
         return url;
     }
 
-    public String setUrl() {
+    public String setUrl(String url) {
         return this.url;
+    }
+
+    public String getNewsLetterName() {
+        return newsLetterName;
+    }
+
+    public String setNewsLetterName(String newsLetterName) {
+        return this.newsLetterName;
+    }
+
+    public String getArticleTitle() {
+        return articleTitle;
+    }
+
+    public String setArticleTitle(String articleTitle) {
+        return this.articleTitle;
     }
 
 

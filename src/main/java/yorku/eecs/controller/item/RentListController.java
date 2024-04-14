@@ -1,23 +1,28 @@
 package yorku.eecs.controller.item;
 
 import yorku.eecs.controller.ControllerError;
+import yorku.eecs.logic.CSVError;
 import yorku.eecs.logic.CsvUtil;
 import yorku.eecs.model.item.Item;
 import yorku.eecs.model.user.User;
+
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class RentListController {
+    private String path = "src/main/resources/data/rentlist.csv";
+
     /*
     Format:
     First column: User ID
     Second column: List of items the user has checked out
     Uses rentlist.csv for data
      */
-    private String path = "src/main/resources/data/rentlist.csv";
-
     //Creating Entry
     public void createEntry(User user, Item item) throws ControllerError {
         //Check if user exists
@@ -42,7 +47,7 @@ public class RentListController {
         }
     }
 
-    private String serializeItemList(ArrayList<Item> rentList) {
+    public static String serializeItemList(ArrayList<Item> rentList) {
         return rentList.stream()
                 .map(item -> item.getStringID())
                 .collect(Collectors.joining(","));

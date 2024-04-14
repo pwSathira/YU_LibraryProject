@@ -22,7 +22,7 @@ public class UserFactory {
         return user;
     }
 
-    private static User determineUser(String userType) {
+    public static User determineUser(String userType) {
         User user = null;
         switch (userType) {
             case "Student":

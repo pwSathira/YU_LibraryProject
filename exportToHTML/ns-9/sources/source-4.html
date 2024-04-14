@@ -1,0 +1,177 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > ItemFactory</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">yorku.eecs.model.item</a>
+</div>
+
+<h1>Coverage Summary for Class: ItemFactory (yorku.eecs.model.item)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ItemFactory</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    75%
+  </span>
+  <span class="absValue">
+    (3/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    11.1%
+  </span>
+  <span class="absValue">
+    (5/45)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package yorku.eecs.model.item;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;
+<b class="fc">&nbsp;public class ItemFactory {</b>
+&nbsp;    public static Item createItem(String itemType, List&lt;String&gt; record) {
+<b class="fc">&nbsp;        Item item = null;</b>
+<b class="fc">&nbsp;        switch (itemType) {</b>
+&nbsp;            case &quot;Book&quot;:
+<b class="nc">&nbsp;                item = new Book.Builder().build();</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case &quot;CD_DVD&quot;:
+<b class="nc">&nbsp;                item = new CD_DVD.Builder().build();</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case &quot;Magazine&quot;:
+<b class="nc">&nbsp;                item = new Magazine.Builder().build();</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case &quot;Textbook&quot;:
+<b class="nc">&nbsp;                item = new Textbook.Builder().build();</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            default:
+<b class="fc">&nbsp;                throw new IllegalArgumentException(&quot;Unknown item type: &quot; + itemType);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        item.setItemID(Integer.parseInt(record.get(0)));</b>
+<b class="nc">&nbsp;        item.setItemName(record.get(1));</b>
+<b class="nc">&nbsp;        item.setLocation(record.get(2));</b>
+<b class="nc">&nbsp;        item.setPublisher(record.get(3));</b>
+<b class="nc">&nbsp;        item.setPrice(Integer.parseInt(record.get(4)));</b>
+<b class="nc">&nbsp;        item.setQuantity(Integer.parseInt(record.get(5)));</b>
+<b class="nc">&nbsp;        item.setExpiryDate(record.get(6));</b>
+<b class="nc">&nbsp;        return item;</b>
+&nbsp;    }
+&nbsp;    public static Item updateItem(Item item, List&lt;String&gt; record) {
+<b class="fc">&nbsp;        String itemType = item.getClass().getSimpleName();</b>
+<b class="nc">&nbsp;        updateGeneralRecord(item, record);</b>
+<b class="nc">&nbsp;        switch (itemType) {</b>
+&nbsp;            case &quot;Book&quot;:
+<b class="nc">&nbsp;                Book book = (Book) item;</b>
+<b class="nc">&nbsp;                record.set(7, book.getISBN());</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case &quot;CD_DVD&quot;:
+<b class="nc">&nbsp;                CD_DVD cd_dvd = (CD_DVD) item;</b>
+<b class="nc">&nbsp;                record.set(7, cd_dvd.getUPC());</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case &quot;Magazine&quot;:
+<b class="nc">&nbsp;                Magazine magazine = (Magazine) item;</b>
+<b class="nc">&nbsp;                record.set(7, magazine.getISSN());</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case &quot;Textbook&quot;:
+<b class="nc">&nbsp;                Textbook textbook = (Textbook) item;</b>
+<b class="nc">&nbsp;                record.set(7, textbook.getISBN());</b>
+<b class="nc">&nbsp;                record.set(8, textbook.getEdition());</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            default:
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;Unknown item type: &quot; + itemType);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return item;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static void updateGeneralRecord(Item item, List&lt;String&gt; record) {
+<b class="nc">&nbsp;        record.set(0, Integer.toString(item.getItemID()));</b>
+<b class="nc">&nbsp;        record.set(1, item.getItemName());</b>
+<b class="nc">&nbsp;        record.set(2, item.getLocation());</b>
+<b class="nc">&nbsp;        record.set(3, item.getPublisher());</b>
+<b class="nc">&nbsp;        record.set(4, Integer.toString(item.getPrice()));</b>
+<b class="nc">&nbsp;        record.set(5, Integer.toString(item.getQuantity()));</b>
+<b class="nc">&nbsp;        record.set(6, item.getExpiryDate());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-06 19:56</div>
+</div>
+</body>
+</html>
